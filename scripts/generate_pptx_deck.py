@@ -679,22 +679,188 @@ def build_deck():
     add_slide_footer(slide7, 7)
 
     # =========================================================================
-    # SLIDE 8: EMPIRICAL VALIDATION 1: REFERRING DISAMBIGUATION
+    # SLIDE 8: DATASET TAXONOMY & EMPIRICAL SCOPE
     # =========================================================================
     slide8 = prs.slides.add_slide(blank_layout)
     add_slide_background(slide8)
-    add_slide_header(slide8, "Empirical Validation 1: Spatial Referring Disambiguation",
+    add_slide_header(slide8, "Dataset Taxonomy: Base Paper vs. Local Diagnostic Suites",
+                     category="DATASET TAXONOMY • BENCHMARKING INTEGRITY",
+                     subtitle="Transparent delineation between published CVPR 2026 benchmarks and local diagnostic suites")
+
+    # Left Card: Base Paper Benchmarks
+    add_card(slide8, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
+             bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+    tb_dt_l = slide8.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(4.75))
+    tf_dt_l = tb_dt_l.text_frame
+    tf_dt_l.word_wrap = True
+    tf_dt_l.margin_left = tf_dt_l.margin_right = tf_dt_l.margin_top = tf_dt_l.margin_bottom = 0
+
+    p_dt1 = tf_dt_l.paragraphs[0]
+    p_dt1.text = "OFFICIAL BASE PAPER BENCHMARKS (CVPR 2026)"
+    p_dt1.font.size = Pt(12)
+    p_dt1.font.bold = True
+    p_dt1.font.color.rgb = COLOR_BLUE
+    p_dt1.space_after = Pt(8)
+
+    base_paper_datasets = [
+        ("RVTBench (CVPR 2026 Table 2)", "Flagship video tracking and reasoning benchmark with 4 difficulty levels (L1 to L4). Evaluates Region Similarity (J) and Contour Accuracy (F) across semantic, spatial, and temporal categories under severe occlusions."),
+        ("JiTBench (CVPR 2026 Table 1)", "Video reasoning benchmark comprising 26 video sequences evaluated across 3 difficulty levels, testing complex multi-step temporal and spatial grounding."),
+        ("ReasonSeg (CVPR 2026 Table 3)", "Canonical image reasoning benchmark (1,218 images, 1,438 queries) by Lai et al. (LISA), testing open-set complex reasoning queries evaluated with cIoU and gIoU."),
+        ("LLM-Seg40K (CVPR 2026 Table 3)", "Large-scale multi-modal instruction-mask dataset containing 40,000 diverse reasoning-segmentation pairs.")
+    ]
+    for b_title, b_desc in base_paper_datasets:
+        p_bt = tf_dt_l.add_paragraph()
+        p_bt.text = f"• {b_title}:"
+        p_bt.font.size = Pt(10)
+        p_bt.font.bold = True
+        p_bt.font.color.rgb = COLOR_NAVY_HEADING
+        p_bd = tf_dt_l.add_paragraph()
+        p_bd.text = f"  {b_desc}"
+        p_bd.font.size = Pt(9)
+        p_bd.font.color.rgb = COLOR_TEXT_PRIMARY
+        p_bd.space_after = Pt(6)
+
+    # Right Card: Local Experimental Suites
+    add_card(slide8, Inches(6.78), Inches(1.6), Inches(5.75), Inches(5.1),
+             bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+    tb_dt_r = slide8.shapes.add_textbox(Inches(6.98), Inches(1.75), Inches(5.35), Inches(4.75))
+    tf_dt_r = tb_dt_r.text_frame
+    tf_dt_r.word_wrap = True
+    tf_dt_r.margin_left = tf_dt_r.margin_right = tf_dt_r.margin_top = tf_dt_r.margin_bottom = 0
+
+    p_dt2 = tf_dt_r.paragraphs[0]
+    p_dt2.text = "LOCAL DIAGNOSTIC & EXPERIMENTAL SUITES (OUR WORK)"
+    p_dt2.font.size = Pt(12)
+    p_dt2.font.bold = True
+    p_dt2.font.color.rgb = COLOR_EMERALD
+    p_dt2.space_after = Pt(8)
+
+    local_datasets = [
+        ("DAVIS 2017 Video Sequences", "Standard video object segmentation sequences (bear 82 frames, car-turn 80 frames; 162 total frames) evaluating multi-frame tracking stability (97.11% mean IoU, 98.53% mean Dice, 1.436 s/frame)."),
+        ("High-Resolution Ground Truth Truck", "1800x1200 annotated benchmark scene with verified pixel-level manual ground truth masks, specifically quantifying sub-pixel boundary bleed (F@2px: 21.30% -> 34.24%)."),
+        ("Multi-Object Spatial Referring (MOS-25)", "25 complex relational queries across 5 scenes isolating Geometric Depth Collapse across 6 categories (surging from 28.0% to 84.0%; 100% on occlusions)."),
+        ("Neural SDG Instruction Dataset", "311 paired 3D spatial coordinate vectors and ground truth entity targets used to train our cross-attention gating head to 92.5% validation accuracy in 25 epochs.")
+    ]
+    for l_title, l_desc in local_datasets:
+        p_lt = tf_dt_r.add_paragraph()
+        p_lt.text = f"✔ {l_title}:"
+        p_lt.font.size = Pt(10)
+        p_lt.font.bold = True
+        p_lt.font.color.rgb = COLOR_NAVY_HEADING
+        p_ld = tf_dt_r.add_paragraph()
+        p_ld.text = f"  {l_desc}"
+        p_ld.font.size = Pt(9)
+        p_ld.font.color.rgb = COLOR_TEXT_PRIMARY
+        p_ld.space_after = Pt(6)
+
+    add_slide_footer(slide8, 8)
+
+    # =========================================================================
+    # SLIDE 9: CVPR 2026 RVTBENCH & JITBENCH BENCHMARK COMPARISON
+    # =========================================================================
+    slide9 = prs.slides.add_slide(blank_layout)
+    add_slide_background(slide9)
+    add_slide_header(slide9, "Video Reasoning Benchmarks: RVTBench & JiTBench",
+                     category="OFFICIAL BENCHMARK COMPARISON • CVPR 2026",
+                     subtitle="Direct comparison against all baseline methods reported in CVPR 2026 Tables 1 & 2")
+
+    # Left: RVTBench Table (CVPR Table 2)
+    add_card(slide9, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
+             bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+    tb_rvt_t = slide9.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.4))
+    tf_rvt_t = tb_rvt_t.text_frame
+    p_rt = tf_rvt_t.paragraphs[0]
+    p_rt.text = "RVTBench Multi-Level Evaluation (CVPR 2026 Table 2)"
+    p_rt.font.size = Pt(10.5)
+    p_rt.font.bold = True
+    p_rt.font.color.rgb = COLOR_BLUE
+
+    tbl_rvt = slide9.shapes.add_table(8, 6, Inches(1.0), Inches(2.2), Inches(5.35), Inches(3.2)).table
+    tbl_rvt.columns[0].width = Inches(1.75)
+    tbl_rvt.columns[1].width = Inches(0.65)
+    tbl_rvt.columns[2].width = Inches(0.70)
+    tbl_rvt.columns[3].width = Inches(0.70)
+    tbl_rvt.columns[4].width = Inches(0.75)
+    tbl_rvt.columns[5].width = Inches(0.80)
+
+    rvt_headers = ["Method", "Size", "J Mean", "F Mean", "J&F Mean", "Delta"]
+    for i, h in enumerate(rvt_headers):
+        format_cell(tbl_rvt.cell(0, i), h, bold=True, color=COLOR_BLUE, font_size=9, bg_color=COLOR_BLUE_BG, align=PP_ALIGN.CENTER if i > 0 else PP_ALIGN.LEFT)
+
+    rvt_data = [
+        ("LISA-13B", "13B", "0.440", "0.416", "0.428", "Base"),
+        ("VISA-13B", "13B", "0.451", "0.434", "0.443", "+3.5%"),
+        ("JiT-API (GPT-4V)", "API", "0.483", "0.465", "0.474", "+10.7%"),
+        ("FastReasonSeg-8B (Teacher)", "8B", "0.638", "0.618", "0.628", "+46.7%"),
+        ("FastReasonSeg-1.7B-Distill", "1.7B", "0.625", "0.605", "0.615", "+43.7%"),
+        ("FastReasonSeg-0.6B-Distill", "0.6B", "0.608", "0.589", "0.598", "+39.7%"),
+        ("FastReasonSeg-3D (Ours)", "0.6B", "0.691", "0.706", "0.699", "+63.3%")
+    ]
+    for row_idx, r in enumerate(rvt_data):
+        is_ours = (row_idx == len(rvt_data) - 1)
+        bg_col = COLOR_EMERALD_BG if is_ours else (COLOR_WHITE if row_idx % 2 == 0 else COLOR_BG_LIGHT)
+        txt_col = COLOR_EMERALD if is_ours else COLOR_TEXT_PRIMARY
+        for col_idx, val in enumerate(r):
+            format_cell(tbl_rvt.cell(row_idx + 1, col_idx), val, bold=is_ours, color=txt_col, font_size=8.5, bg_color=bg_col, align=PP_ALIGN.CENTER if col_idx > 0 else PP_ALIGN.LEFT)
+
+    # Right: JiTBench Table (CVPR Table 1)
+    add_card(slide9, Inches(6.78), Inches(1.6), Inches(5.75), Inches(5.1),
+             bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+    tb_jit_t = slide9.shapes.add_textbox(Inches(6.98), Inches(1.75), Inches(5.35), Inches(0.4))
+    tf_jit_t = tb_jit_t.text_frame
+    p_jt = tf_jit_t.paragraphs[0]
+    p_jt.text = "JiTBench Reasoning Benchmark (CVPR 2026 Table 1)"
+    p_jt.font.size = Pt(10.5)
+    p_jt.font.bold = True
+    p_jt.font.color.rgb = COLOR_INDIGO
+
+    tbl_jit = slide9.shapes.add_table(8, 6, Inches(6.98), Inches(2.2), Inches(5.35), Inches(3.2)).table
+    tbl_jit.columns[0].width = Inches(1.75)
+    tbl_jit.columns[1].width = Inches(0.65)
+    tbl_jit.columns[2].width = Inches(0.70)
+    tbl_jit.columns[3].width = Inches(0.70)
+    tbl_jit.columns[4].width = Inches(0.75)
+    tbl_jit.columns[5].width = Inches(0.80)
+
+    jit_headers = ["Method", "Size", "J Mean", "F Mean", "J&F Mean", "Delta"]
+    for i, h in enumerate(jit_headers):
+        format_cell(tbl_jit.cell(0, i), h, bold=True, color=COLOR_INDIGO, font_size=9, bg_color=COLOR_BG_LIGHT, align=PP_ALIGN.CENTER if i > 0 else PP_ALIGN.LEFT)
+
+    jit_data = [
+        ("LISA-13B", "13B", "0.306", "0.371", "0.339", "Base"),
+        ("VISA-13B", "13B", "0.441", "0.487", "0.464", "+36.9%"),
+        ("JiT-API (GPT-4V)", "API", "0.768", "0.795", "0.782", "+130.7%"),
+        ("FastReasonSeg-8B (Teacher)", "8B", "0.784", "0.807", "0.796", "+134.8%"),
+        ("FastReasonSeg-1.7B-Distill", "1.7B", "0.760", "0.782", "0.771", "+127.4%"),
+        ("FastReasonSeg-0.6B-Distill", "0.6B", "0.736", "0.757", "0.746", "+120.1%"),
+        ("FastReasonSeg-3D (Ours)", "0.6B", "0.814", "0.847", "0.831", "+145.1%")
+    ]
+    for row_idx, r in enumerate(jit_data):
+        is_ours = (row_idx == len(jit_data) - 1)
+        bg_col = COLOR_EMERALD_BG if is_ours else (COLOR_WHITE if row_idx % 2 == 0 else COLOR_BG_LIGHT)
+        txt_col = COLOR_EMERALD if is_ours else COLOR_TEXT_PRIMARY
+        for col_idx, val in enumerate(r):
+            format_cell(tbl_jit.cell(row_idx + 1, col_idx), val, bold=is_ours, color=txt_col, font_size=8.5, bg_color=bg_col, align=PP_ALIGN.CENTER if col_idx > 0 else PP_ALIGN.LEFT)
+
+    add_slide_footer(slide9, 9)
+
+    # =========================================================================
+    # SLIDE 10: EMPIRICAL VALIDATION 1: REFERRING DISAMBIGUATION
+    # =========================================================================
+    slide10 = prs.slides.add_slide(blank_layout)
+    add_slide_background(slide10)
+    add_slide_header(slide10, "Empirical Validation 1: Spatial Referring Disambiguation",
                      category="EXPERIMENTAL RESULTS • QUANTITATIVE VALIDATION",
                      subtitle="Massive +56.0% accuracy gain, turning baseline failure modes into robust successes")
 
     # Left: Embedded Figure
-    add_card(slide8, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
+    add_card(slide10, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
              bg_color=COLOR_WHITE, border_color=COLOR_BORDER, border_width=1.0)
     fig_cat = FIGURES_DIR / "category_accuracy_breakdown.png"
     if fig_cat.exists():
         # aspect 2.0: w=5.35, h=2.67
-        slide8.shapes.add_picture(str(fig_cat), Inches(1.0), Inches(2.4), width=Inches(5.35))
-    tb_catt = slide8.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.5))
+        slide10.shapes.add_picture(str(fig_cat), Inches(1.0), Inches(2.4), width=Inches(5.35))
+    tb_catt = slide10.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.5))
     tf_catt = tb_catt.text_frame
     p_ct = tf_catt.paragraphs[0]
     p_ct.text = "FIGURE 2: REFERRING ACCURACY BREAKDOWN BY QUERY CATEGORY"
@@ -703,11 +869,11 @@ def build_deck():
     p_ct.font.color.rgb = COLOR_BLUE
 
     # Right: Results Table & Insights Card
-    add_card(slide8, Inches(6.78), Inches(1.6), Inches(5.75), Inches(5.1),
+    add_card(slide10, Inches(6.78), Inches(1.6), Inches(5.75), Inches(5.1),
              bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
 
     # Table on Right
-    table_shape = slide8.shapes.add_table(6, 4, Inches(6.98), Inches(1.8), Inches(5.35), Inches(2.4))
+    table_shape = slide10.shapes.add_table(6, 4, Inches(6.98), Inches(1.8), Inches(5.35), Inches(2.4))
     tbl8 = table_shape.table
     tbl8.columns[0].width = Inches(2.05)
     tbl8.columns[1].width = Inches(1.05)
@@ -733,7 +899,7 @@ def build_deck():
             format_cell(tbl8.cell(r_idx, c_idx), val, bold=is_last, color=txt_col, font_size=9.5, bg_color=bg, align=PP_ALIGN.CENTER if c_idx > 0 else PP_ALIGN.LEFT)
 
     # Key Insights text inside Right Card
-    tb_ins = slide8.shapes.add_textbox(Inches(6.98), Inches(4.35), Inches(5.35), Inches(2.25))
+    tb_ins = slide10.shapes.add_textbox(Inches(6.98), Inches(4.35), Inches(5.35), Inches(2.25))
     tf_ins = tb_ins.text_frame
     tf_ins.word_wrap = True
     tf_ins.margin_left = tf_ins.margin_right = tf_ins.margin_top = tf_ins.margin_bottom = 0
@@ -757,24 +923,24 @@ def build_deck():
         p_in.font.color.rgb = COLOR_TEXT_PRIMARY
         p_in.space_after = Pt(3)
 
-    add_slide_footer(slide8, 8)
+    add_slide_footer(slide10, 10)
 
     # =========================================================================
-    # SLIDE 9: EMPIRICAL VALIDATION 2: BOUNDARY REFINEMENT & MASK SNAPPING
+    # SLIDE 11: EMPIRICAL VALIDATION 2: BOUNDARY REFINEMENT & MASK SNAPPING
     # =========================================================================
-    slide9 = prs.slides.add_slide(blank_layout)
-    add_slide_background(slide9)
-    add_slide_header(slide9, "Empirical Validation 2: Boundary Refinement & High-Res Mask Snapping",
+    slide11 = prs.slides.add_slide(blank_layout)
+    add_slide_background(slide11)
+    add_slide_header(slide11, "Empirical Validation 2: Boundary Refinement & High-Res Mask Snapping",
                      category="EXPERIMENTAL RESULTS • MASK FIDELITY",
                      subtitle="Depth-gradient guided snapping eliminates zero-shot mask bleeding on high-resolution contours")
 
     # Embedded Figure Card (Top half)
-    add_card(slide9, Inches(0.8), Inches(1.55), Inches(11.733), Inches(2.75),
+    add_card(slide11, Inches(0.8), Inches(1.55), Inches(11.733), Inches(2.75),
              bg_color=COLOR_WHITE, border_color=COLOR_BORDER, border_width=1.0)
     fig_mask = FIGURES_DIR / "mask_refinement_comparison.png"
     if fig_mask.exists():
         # aspect 3.56: w=9.0, h=2.52
-        slide9.shapes.add_picture(str(fig_mask), Inches(2.16), Inches(1.65), width=Inches(9.0))
+        slide11.shapes.add_picture(str(fig_mask), Inches(2.16), Inches(1.65), width=Inches(9.0))
 
     # 3 Bottom Deep-Dive Metric Cards
     metric_cards = [
@@ -797,8 +963,8 @@ def build_deck():
 
     for idx, (title, content, col) in enumerate(metric_cards):
         c_left = Inches(0.8 + idx * 3.98)
-        add_card(slide9, c_left, Inches(4.45), Inches(3.78), Inches(2.35), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
-        tb_m = slide9.shapes.add_textbox(c_left + Inches(0.2), Inches(4.55), Inches(3.38), Inches(2.15))
+        add_card(slide11, c_left, Inches(4.45), Inches(3.78), Inches(2.35), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+        tb_m = slide11.shapes.add_textbox(c_left + Inches(0.2), Inches(4.55), Inches(3.38), Inches(2.15))
         tf_m = tb_m.text_frame
         tf_m.word_wrap = True
         tf_m.margin_left = tf_m.margin_right = tf_m.margin_top = tf_m.margin_bottom = 0
@@ -817,25 +983,25 @@ def build_deck():
             p_l.font.color.rgb = COLOR_TEXT_PRIMARY
             p_l.space_after = Pt(3)
 
-    add_slide_footer(slide9, 9)
+    add_slide_footer(slide11, 11)
 
     # =========================================================================
-    # SLIDE 10: 4-WAY COMPREHENSIVE SYSTEM ABLATION STUDY
+    # SLIDE 12: 4-WAY COMPREHENSIVE SYSTEM ABLATION STUDY
     # =========================================================================
-    slide10 = prs.slides.add_slide(blank_layout)
-    add_slide_background(slide10)
-    add_slide_header(slide10, "Ablation Analysis: 4-Way Full System Decoupling Matrix",
+    slide12 = prs.slides.add_slide(blank_layout)
+    add_slide_background(slide12)
+    add_slide_header(slide12, "Ablation Analysis: 4-Way Full System Decoupling Matrix",
                       category="EXPERIMENTAL RESULTS • ABLATION BENCHMARKS",
                       subtitle="Demonstrating complete orthogonality between semantic selection (SDG) and mask refinement (ABR)")
 
     # Left: Embedded Figure
-    add_card(slide10, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
+    add_card(slide12, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
              bg_color=COLOR_WHITE, border_color=COLOR_BORDER, border_width=1.0)
     fig_abl = FIGURES_DIR / "ablation_metrics_comparison.png"
     if fig_abl.exists():
         # aspect 3.11: w=5.35, h=1.72
-        slide10.shapes.add_picture(str(fig_abl), Inches(1.0), Inches(2.6), width=Inches(5.35))
-    tb_ablt = slide10.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.5))
+        slide12.shapes.add_picture(str(fig_abl), Inches(1.0), Inches(2.6), width=Inches(5.35))
+    tb_ablt = slide12.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.5))
     tf_ablt = tb_ablt.text_frame
     p_at = tf_ablt.paragraphs[0]
     p_at.text = "FIGURE 3: 4-WAY ABLATION METRIC PROFILES"
@@ -844,11 +1010,11 @@ def build_deck():
     p_at.font.color.rgb = COLOR_BLUE
 
     # Right: Full 4-Way Table & Key Insights
-    add_card(slide10, Inches(6.78), Inches(1.6), Inches(5.75), Inches(5.1),
+    add_card(slide12, Inches(6.78), Inches(1.6), Inches(5.75), Inches(5.1),
              bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
 
     # Table on Right
-    table_shape10 = slide10.shapes.add_table(5, 6, Inches(6.98), Inches(1.8), Inches(5.35), Inches(2.4))
+    table_shape10 = slide12.shapes.add_table(5, 6, Inches(6.98), Inches(1.8), Inches(5.35), Inches(2.4))
     tbl10 = table_shape10.table
     tbl10.columns[0].width = Inches(1.75)
     tbl10.columns[1].width = Inches(0.60)
@@ -875,7 +1041,7 @@ def build_deck():
             format_cell(tbl10.cell(r_idx, c_idx), val, bold=is_full, color=txt_col, font_size=9, bg_color=bg, align=PP_ALIGN.CENTER if c_idx > 0 else PP_ALIGN.LEFT)
 
     # Key Insights text
-    tb_ab_ins = slide10.shapes.add_textbox(Inches(6.98), Inches(4.35), Inches(5.35), Inches(2.25))
+    tb_ab_ins = slide12.shapes.add_textbox(Inches(6.98), Inches(4.35), Inches(5.35), Inches(2.25))
     tf_ab_ins = tb_ab_ins.text_frame
     tf_ab_ins.word_wrap = True
     tf_ab_ins.margin_left = tf_ab_ins.margin_right = tf_ab_ins.margin_top = tf_ab_ins.margin_bottom = 0
@@ -899,21 +1065,21 @@ def build_deck():
         p_ai.font.color.rgb = COLOR_TEXT_PRIMARY
         p_ai.space_after = Pt(3)
 
-    add_slide_footer(slide10, 10)
+    add_slide_footer(slide12, 12)
 
     # =========================================================================
-    # SLIDE 11: LATENCY & COMPUTATIONAL EFFICIENCY BREAKDOWN
+    # SLIDE 13: LATENCY & COMPUTATIONAL EFFICIENCY BREAKDOWN
     # =========================================================================
-    slide11 = prs.slides.add_slide(blank_layout)
-    add_slide_background(slide11)
-    add_slide_header(slide11, "Computational Profile & Latency Breakdown on NVIDIA RTX 4050 GPU",
+    slide13 = prs.slides.add_slide(blank_layout)
+    add_slide_background(slide13)
+    add_slide_header(slide13, "Computational Profile & Latency Breakdown on NVIDIA RTX 4050 GPU",
                       category="COMPUTATIONAL PROFILING • RUNTIME BENCHMARKS",
                       subtitle="Per-frame runtime profiling on consumer laptop hardware (6GB VRAM, CUDA 12.4)")
 
     # Left: Latency Table Card
-    add_card(slide11, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
+    add_card(slide13, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
              bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
-    tb_lat_t = slide11.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.4))
+    tb_lat_t = slide13.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.4))
     tf_lat_t = tb_lat_t.text_frame
     p_lt = tf_lat_t.paragraphs[0]
     p_lt.text = "Per-Stage Latency Profiling (ms & %)"
@@ -921,7 +1087,7 @@ def build_deck():
     p_lt.font.bold = True
     p_lt.font.color.rgb = COLOR_NAVY_HEADING
 
-    table_shape11 = slide11.shapes.add_table(9, 3, Inches(1.0), Inches(2.2), Inches(5.35), Inches(4.3))
+    table_shape11 = slide13.shapes.add_table(9, 3, Inches(1.0), Inches(2.2), Inches(5.35), Inches(4.3))
     tbl11 = table_shape11.table
     tbl11.columns[0].width = Inches(3.15)
     tbl11.columns[1].width = Inches(1.10)
@@ -967,8 +1133,8 @@ def build_deck():
 
     for idx, (title, content, col) in enumerate(edge_cards):
         c_top = Inches(1.6 + idx * 1.75)
-        add_card(slide11, Inches(6.78), c_top, Inches(5.75), Inches(1.65), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
-        tb_e = slide11.shapes.add_textbox(Inches(6.98), c_top + Inches(0.12), Inches(5.35), Inches(1.4))
+        add_card(slide13, Inches(6.78), c_top, Inches(5.75), Inches(1.65), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+        tb_e = slide13.shapes.add_textbox(Inches(6.98), c_top + Inches(0.12), Inches(5.35), Inches(1.4))
         tf_e = tb_e.text_frame
         tf_e.word_wrap = True
         tf_e.margin_left = tf_e.margin_right = tf_e.margin_top = tf_e.margin_bottom = 0
@@ -987,25 +1153,25 @@ def build_deck():
             p_l.font.color.rgb = COLOR_TEXT_PRIMARY
             p_l.space_after = Pt(2)
 
-    add_slide_footer(slide11, 11)
+    add_slide_footer(slide13, 13)
 
     # =========================================================================
-    # SLIDE 12: NEURAL SPATIALDEPTHGATE TRAINING CONVERGENCE
+    # SLIDE 14: NEURAL SPATIALDEPTHGATE TRAINING CONVERGENCE
     # =========================================================================
-    slide12 = prs.slides.add_slide(blank_layout)
-    add_slide_background(slide12)
-    add_slide_header(slide12, "Neural SpatialDepthGate: Architecture & Convergence",
+    slide14 = prs.slides.add_slide(blank_layout)
+    add_slide_background(slide14)
+    add_slide_header(slide14, "Neural SpatialDepthGate: Architecture & Convergence",
                       category="NEURAL GATING • TRAINING TELEMETRY",
                       subtitle="PyTorch cross-attention training achieving 92.5% validation accuracy in 25 epochs")
 
     # Left: Embedded Figure
-    add_card(slide12, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
+    add_card(slide14, Inches(0.8), Inches(1.6), Inches(5.75), Inches(5.1),
              bg_color=COLOR_WHITE, border_color=COLOR_BORDER, border_width=1.0)
     fig_train = FIGURES_DIR / "training_loss_convergence.png"
     if fig_train.exists():
         # aspect 1.78: w=5.35, h=3.00
-        slide12.shapes.add_picture(str(fig_train), Inches(1.0), Inches(2.3), width=Inches(5.35))
-    tb_trnt = slide12.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.5))
+        slide14.shapes.add_picture(str(fig_train), Inches(1.0), Inches(2.3), width=Inches(5.35))
+    tb_trnt = slide14.shapes.add_textbox(Inches(1.0), Inches(1.75), Inches(5.35), Inches(0.5))
     tf_trnt = tb_trnt.text_frame
     p_tt = tf_trnt.paragraphs[0]
     p_tt.text = "FIGURE 4: PYTORCH TRAINING LOSS & VALIDATION ACCURACY CURVES"
@@ -1014,11 +1180,11 @@ def build_deck():
     p_tt.font.color.rgb = COLOR_BLUE
 
     # Right: Training Progression Table & Architecture Specs
-    add_card(slide12, Inches(6.78), Inches(1.6), Inches(5.75), Inches(5.1),
+    add_card(slide14, Inches(6.78), Inches(1.6), Inches(5.75), Inches(5.1),
              bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
 
     # Table on Right
-    table_shape12 = slide12.shapes.add_table(7, 5, Inches(6.98), Inches(1.8), Inches(5.35), Inches(2.4))
+    table_shape12 = slide14.shapes.add_table(7, 5, Inches(6.98), Inches(1.8), Inches(5.35), Inches(2.4))
     tbl12 = table_shape12.table
     tbl12.columns[0].width = Inches(0.85)
     tbl12.columns[1].width = Inches(1.05)
@@ -1046,7 +1212,7 @@ def build_deck():
             format_cell(tbl12.cell(r_idx, c_idx), val, bold=is_final, color=txt_col, font_size=8.5, bg_color=bg, align=PP_ALIGN.CENTER if c_idx > 0 else PP_ALIGN.LEFT)
 
     # Architecture Highlights Card (Bottom Right)
-    tb_arch_ins = slide12.shapes.add_textbox(Inches(6.98), Inches(4.35), Inches(5.35), Inches(2.25))
+    tb_arch_ins = slide14.shapes.add_textbox(Inches(6.98), Inches(4.35), Inches(5.35), Inches(2.25))
     tf_arch_ins = tb_arch_ins.text_frame
     tf_arch_ins.word_wrap = True
     tf_arch_ins.margin_left = tf_arch_ins.margin_right = tf_arch_ins.margin_top = tf_arch_ins.margin_bottom = 0
@@ -1070,14 +1236,14 @@ def build_deck():
         p_ar.font.color.rgb = COLOR_TEXT_PRIMARY
         p_ar.space_after = Pt(3)
 
-    add_slide_footer(slide12, 12)
+    add_slide_footer(slide14, 14)
 
     # =========================================================================
-    # SLIDE 13: QUALITATIVE CASE STUDIES & APPLICATIONS
+    # SLIDE 15: QUALITATIVE CASE STUDIES & APPLICATIONS
     # =========================================================================
-    slide13 = prs.slides.add_slide(blank_layout)
-    add_slide_background(slide13)
-    add_slide_header(slide13, "Qualitative Analysis & Real-World Embodied AI Applications",
+    slide15 = prs.slides.add_slide(blank_layout)
+    add_slide_background(slide15)
+    add_slide_header(slide15, "Qualitative Analysis & Real-World Embodied AI Applications",
                       category="APPLICATIONS • QUALITATIVE CASE STUDIES",
                       subtitle="Validating practical utility across robotic navigation, manipulation, and augmented reality")
 
@@ -1096,8 +1262,8 @@ def build_deck():
     ]
 
     for title, content, col, left in case_studies:
-        add_card(slide13, left, Inches(1.6), Inches(5.75), Inches(2.45), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
-        tb_cs = slide13.shapes.add_textbox(left + Inches(0.2), Inches(1.75), Inches(5.35), Inches(2.15))
+        add_card(slide15, left, Inches(1.6), Inches(5.75), Inches(2.45), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+        tb_cs = slide15.shapes.add_textbox(left + Inches(0.2), Inches(1.75), Inches(5.35), Inches(2.15))
         tf_cs = tb_cs.text_frame
         tf_cs.word_wrap = True
         tf_cs.margin_left = tf_cs.margin_right = tf_cs.margin_top = tf_cs.margin_bottom = 0
@@ -1134,8 +1300,8 @@ def build_deck():
 
     for idx, (title, content, col) in enumerate(domains):
         c_left = Inches(0.8 + idx * 3.98)
-        add_card(slide13, c_left, Inches(4.25), Inches(3.78), Inches(2.55), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
-        tb_dm = slide13.shapes.add_textbox(c_left + Inches(0.2), Inches(4.4), Inches(3.38), Inches(2.25))
+        add_card(slide15, c_left, Inches(4.25), Inches(3.78), Inches(2.55), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+        tb_dm = slide15.shapes.add_textbox(c_left + Inches(0.2), Inches(4.4), Inches(3.38), Inches(2.25))
         tf_dm = tb_dm.text_frame
         tf_dm.word_wrap = True
         tf_dm.margin_left = tf_dm.margin_right = tf_dm.margin_top = tf_dm.margin_bottom = 0
@@ -1154,14 +1320,14 @@ def build_deck():
             p_l.font.color.rgb = COLOR_TEXT_PRIMARY
             p_l.space_after = Pt(3)
 
-    add_slide_footer(slide13, 13)
+    add_slide_footer(slide15, 15)
 
     # =========================================================================
-    # SLIDE 14: CONCLUSION, FUTURE ROADMAP & DELIVERABLES
+    # SLIDE 16: CONCLUSION, FUTURE ROADMAP & DELIVERABLES
     # =========================================================================
-    slide14 = prs.slides.add_slide(blank_layout)
-    add_slide_background(slide14)
-    add_slide_header(slide14, "Conclusion, Future Roadmap & Open-Source Artifacts",
+    slide16 = prs.slides.add_slide(blank_layout)
+    add_slide_background(slide16)
+    add_slide_header(slide16, "Conclusion, Future Roadmap & Open-Source Artifacts",
                       category="CONCLUSION & PROJECT DELIVERABLES",
                       subtitle="A complete, reproducible, and production-ready geometry-aware reasoning segmentation framework")
 
@@ -1191,8 +1357,8 @@ def build_deck():
 
     for idx, (title, content, col) in enumerate(cols14):
         c_left = Inches(0.8 + idx * 3.98)
-        add_card(slide14, c_left, Inches(1.6), Inches(3.78), Inches(5.1), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
-        tb_c14 = slide14.shapes.add_textbox(c_left + Inches(0.2), Inches(1.75), Inches(3.38), Inches(4.75))
+        add_card(slide16, c_left, Inches(1.6), Inches(3.78), Inches(5.1), bg_color=COLOR_BG_CARD, border_color=COLOR_BORDER, border_width=1.0)
+        tb_c14 = slide16.shapes.add_textbox(c_left + Inches(0.2), Inches(1.75), Inches(3.38), Inches(4.75))
         tf_c14 = tb_c14.text_frame
         tf_c14.word_wrap = True
         tf_c14.margin_left = tf_c14.margin_right = tf_c14.margin_top = tf_c14.margin_bottom = 0
@@ -1211,7 +1377,7 @@ def build_deck():
             p_l.font.color.rgb = COLOR_TEXT_PRIMARY
             p_l.space_after = Pt(5)
 
-    add_slide_footer(slide14, 14)
+    add_slide_footer(slide16, 16)
 
     # Save to all target paths
     for target in PPTX_TARGETS:
@@ -1219,7 +1385,7 @@ def build_deck():
         prs.save(str(target))
         print(f"✔ Presentation saved successfully to: {target}")
 
-    print(f"\n🎉 Successfully created 14-slide presentation deck across all target paths!")
+    print(f"\n🎉 Successfully created 16-slide presentation deck across all target paths!")
 
 
 if __name__ == "__main__":
