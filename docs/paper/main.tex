@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
+\graphicspath{{figures/}{../figures/}{./}}
 \usepackage{booktabs}
 \usepackage{cite}
 \usepackage{hyperref}
@@ -60,7 +61,7 @@ Early reasoning segmentation architectures, most notably LISA~\cite{lai2023lisa}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.98\textwidth]{../figures/system_architecture.png}
+\includegraphics[width=0.98\textwidth]{system_architecture.png}
 \caption{\textbf{FastReasonSeg-3D Architectural Overview.} The framework decouples perceptual foundation models (OWLv2, Depth Anything V2, SAM~2) from linguistic reasoning. FastReasonSeg-3D introduces two novel modules: (1)~\textbf{SpatialDepthGate (SDG)}, which projects 2D detections and relative depth into explicit 3D centroid representations, constructs a pairwise relational tensor $\mathcal{R}$ and directed occlusion graph $\mathcal{O}$, and performs geometric cross-attention re-ranking; and (2)~\textbf{AdaptiveBoundaryRefiner (ABR)}, which identifies boundary bleed across depth-gradient ridges and synthesizes corrective prompts for sub-pixel boundary snapping.}
 \label{fig:arch}
 \end{figure*}
@@ -286,7 +287,7 @@ Occlusion Depth & 2 & 0.0\% & \textbf{100.0\%} & \textbf{+100.0\%} \\
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.98\columnwidth]{../figures/category_accuracy_breakdown.png}
+\includegraphics[width=0.98\columnwidth]{category_accuracy_breakdown.png}
 \caption{\textbf{Category Accuracy Breakdown.} SpatialDepthGate achieves dramatic improvements across all relational categories, particularly resolving 100\% of occlusion queries where the baseline failed completely.}
 \label{fig:cat_acc}
 \end{figure}
@@ -320,7 +321,7 @@ Baseline (SAM 2) & 94.61\% & 97.23\% & 21.30\% & 40.87\% \\
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.98\textwidth]{../figures/mask_refinement_comparison.png}
+\includegraphics[width=0.98\textwidth]{mask_refinement_comparison.png}
 \caption{\textbf{Qualitative Visualization of Boundary Refinement on Truck Benchmark.} (a)~Input RGB frame; (b)~Ground Truth manual mask; (c)~Baseline SAM~2 prediction where red pixels highlight over-segmented boundary bleed into background; (d)~AdaptiveBoundaryRefiner output, successfully snapping to true geometric boundaries.}
 \label{fig:mask_refine}
 \end{figure*}
@@ -351,7 +352,7 @@ To evaluate the orthogonality and individual contribution of each module, Table~
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.98\columnwidth]{../figures/ablation_metrics_comparison.png}
+\includegraphics[width=0.98\columnwidth]{ablation_metrics_comparison.png}
 \caption{\textbf{Ablation Study Metrics.} Comparison of Referring Accuracy, Boundary $F@2\text{px}$, and Mask IoU across the four ablation configurations.}
 \label{fig:ablation}
 \end{figure}
@@ -415,7 +416,7 @@ We trained the neural gating network $\mathcal{N}_{sdg}$ using AdamW ($\eta = 10
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.98\columnwidth]{../figures/training_loss_convergence.png}
+\includegraphics[width=0.98\columnwidth]{training_loss_convergence.png}
 \caption{\textbf{Neural SpatialDepthGate Convergence.} (a)~Training loss rapidly decreases from 1.43 to 0.134; (b)~Validation accuracy surges from 36.25\% to 92.50\% within 25 epochs.}
 \label{fig:train_loss}
 \end{figure}
