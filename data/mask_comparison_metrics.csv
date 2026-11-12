@@ -1,0 +1,5 @@
+metric,value,interpretation
+baseline_mask_pixels,635969,Pixels in baseline mask
+refined_mask_pixels,639940,Pixels in refined mask
+agreement_iou,0.9882240744982727,Overlap between baseline and refined masks; not ground-truth accuracy
+agreement_dice,0.9940771638102718,Agreement between baseline and refined masks; not ground-truth accuracy

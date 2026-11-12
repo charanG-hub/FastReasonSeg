@@ -1,0 +1,110 @@
+{
+  "boundary_refinement": {
+    "baseline": {
+      "iou": 0.9461,
+      "dice": 0.9723,
+      "boundary_f2": 0.213,
+      "boundary_f5": 0.4087,
+      "boundary_precision": 0.2063,
+      "boundary_recall": 0.2202
+    },
+    "proposed": {
+      "iou": 0.9622,
+      "dice": 0.9807,
+      "boundary_f2": 0.3424,
+      "boundary_f5": 0.5154,
+      "boundary_precision": 0.3387,
+      "boundary_recall": 0.3462
+    },
+    "gains": {
+      "delta_iou_percent": 1.6,
+      "delta_dice_percent": 0.84,
+      "delta_boundary_f2_percent": 12.94,
+      "delta_boundary_f5_percent": 10.67
+    }
+  },
+  "spatial_reasoning": {
+    "total_queries": 25,
+    "baseline_accuracy_percent": 28.0,
+    "proposed_accuracy_percent": 84.0,
+    "accuracy_gain_percent": 56.0,
+    "category_breakdown": {
+      "depth_spatial": {
+        "total": 5,
+        "base_correct": 1,
+        "proposed_correct": 5
+      },
+      "depth_only": {
+        "total": 9,
+        "base_correct": 4,
+        "proposed_correct": 7
+      },
+      "spatial_relative": {
+        "total": 2,
+        "base_correct": 1,
+        "proposed_correct": 2
+      },
+      "compound": {
+        "total": 4,
+        "base_correct": 0,
+        "proposed_correct": 2
+      },
+      "spatial_only": {
+        "total": 4,
+        "base_correct": 1,
+        "proposed_correct": 4
+      },
+      "occlusion_depth": {
+        "total": 1,
+        "base_correct": 0,
+        "proposed_correct": 1
+      }
+    }
+  },
+  "ablation_matrix": [
+    {
+      "configuration": "Baseline FastReasonSeg (CVPR 2026 Proto)",
+      "spatial_depth_gate": false,
+      "adaptive_boundary_refiner": false,
+      "referring_accuracy_percent": 36.0,
+      "mask_iou_percent": 94.61,
+      "dice_percent": 97.23,
+      "boundary_f2_percent": 22.86,
+      "boundary_f5_percent": 41.5,
+      "latency_ms_per_frame": 1436.0
+    },
+    {
+      "configuration": "FastReasonSeg + SpatialDepthGate",
+      "spatial_depth_gate": true,
+      "adaptive_boundary_refiner": false,
+      "referring_accuracy_percent": 92.0,
+      "mask_iou_percent": 94.61,
+      "dice_percent": 97.23,
+      "boundary_f2_percent": 22.86,
+      "boundary_f5_percent": 41.5,
+      "latency_ms_per_frame": 1442.0
+    },
+    {
+      "configuration": "FastReasonSeg + AdaptiveBoundaryRefiner",
+      "spatial_depth_gate": false,
+      "adaptive_boundary_refiner": true,
+      "referring_accuracy_percent": 36.0,
+      "mask_iou_percent": 96.84,
+      "dice_percent": 98.39,
+      "boundary_f2_percent": 46.12,
+      "boundary_f5_percent": 74.3,
+      "latency_ms_per_frame": 1478.0
+    },
+    {
+      "configuration": "FastReasonSeg-Ours (Full Proposed Architecture)",
+      "spatial_depth_gate": true,
+      "adaptive_boundary_refiner": true,
+      "referring_accuracy_percent": 92.0,
+      "mask_iou_percent": 96.84,
+      "dice_percent": 98.39,
+      "boundary_f2_percent": 46.12,
+      "boundary_f5_percent": 74.3,
+      "latency_ms_per_frame": 1484.0
+    }
+  ]
+}

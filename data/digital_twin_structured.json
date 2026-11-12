@@ -1,0 +1,23 @@
+{
+  "frame_0": {
+    "object_1": {
+      "semantic_label": "truck",
+      "mask": "data/truck_refined_mask.png",
+      "bounding_box_xyxy": [
+        40.0,
+        280.0,
+        1740.0,
+        920.0
+      ],
+      "detector_confidence": 0.26908671855926514,
+      "depth_stats": {
+        "mean": 4.187078475952148,
+        "median": 4.270100116729736,
+        "min": 1.0337278842926025,
+        "max": 4.578012466430664,
+        "std": 0.26414135098457336
+      },
+      "mean_depth": 4.187078475952148
+    }
+  }
+}

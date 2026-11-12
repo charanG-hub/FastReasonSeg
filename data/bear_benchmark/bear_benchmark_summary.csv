@@ -1,0 +1,16 @@
+metric,value
+Frames in CSV,82
+Frames with valid metrics,82
+Frames with errors or missing metrics,0
+Mean IoU,0.966016
+Median IoU,0.966693
+Minimum IoU,0.945021
+Maximum IoU,0.976402
+Mean Dice,0.982706
+Median Dice,0.983065
+Minimum Dice,0.971734
+Maximum Dice,0.988060
+Mean time per processed frame (seconds),1.379354
+Median time per processed frame (seconds),1.282500
+Total measured processing time (seconds),113.107
+Frames with detections,82

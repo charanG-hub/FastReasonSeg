@@ -1,0 +1,8 @@
+FASTREASONSEG PROJECT DEMONSTRATION
+===================================
+Local combined mean IoU: 97.1075%
+Local combined mean Dice: 98.5294%
+Local mean processing time: 1.436 seconds/frame
+Official RVTBench: NOT VERIFIED
+Paper training/distillation pipeline: NOT COMPLETE
+See FINAL_RESEARCH_COMPARISON.md for full qualifications.

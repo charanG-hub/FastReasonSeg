@@ -1,0 +1,103 @@
+
+digraph G {
+    rankdir=LR;
+    splines=ortho;
+    nodesep=0.5;
+    ranksep=0.6;
+    bgcolor="transparent";
+    
+    node [fontname="Helvetica,Arial,sans-serif", fontsize=10, style="filled,rounded", shape=box, margin="0.15,0.1"];
+    edge [fontname="Helvetica,Arial,sans-serif", fontsize=9, color="#334155", penwidth=1.2, arrowsize=0.8];
+
+    subgraph cluster_input {
+        label = "Input Modality";
+        fontname = "Helvetica,Arial,sans-serif";
+        fontcolor = "#1e293b";
+        style = "filled,rounded";
+        fillcolor = "#f8fafc";
+        color = "#cbd5e1";
+        
+        rgb [label="Input RGB Frame
+I ∈ R^{H×W×3}", fillcolor="#ffffff", color="#94a3b8"];
+        query [label="Referring Query Q
+(e.g., 'rear vehicle')", fillcolor="#ffffff", color="#94a3b8"];
+    }
+
+    subgraph cluster_perception {
+        label = "Perception Foundation Models";
+        fontname = "Helvetica,Arial,sans-serif";
+        fontcolor = "#1e293b";
+        style = "filled,rounded";
+        fillcolor = "#eff6ff";
+        color = "#93c5fd";
+
+        owl [label="OWLv2 Detector
+Boxes B_i, Scores s_i", fillcolor="#dbeafe", color="#3b82f6"];
+        da2 [label="Depth Anything V2
+Relative Depth D(u,v)", fillcolor="#dbeafe", color="#3b82f6"];
+        sam2 [label="SAM 2 Engine
+Initial Mask M_0", fillcolor="#dbeafe", color="#3b82f6"];
+    }
+
+    subgraph cluster_sdg {
+        label = "Module 1: SpatialDepthGate (SDG)";
+        fontname = "Helvetica,Arial,sans-serif";
+        fontcolor = "#065f46";
+        style = "filled,rounded";
+        fillcolor = "#ecfdf5";
+        color = "#6ee7b7";
+
+        proj3d [label="3D Centroid Projection
+(x_c, y_c, z_{rel})", fillcolor="#d1fae5", color="#10b981"];
+        rel_tensor [label="Pairwise Relational Tensor R
+Occlusion Directed Graph O", fillcolor="#d1fae5", color="#10b981"];
+        gated_score [label="Geometric Cross-Attention
+Logit Re-Ranking", fillcolor="#a7f3d0", color="#059669", style="filled,rounded,bold"];
+    }
+
+    subgraph cluster_abr {
+        label = "Module 2: AdaptiveBoundaryRefiner (ABR)";
+        fontname = "Helvetica,Arial,sans-serif";
+        fontcolor = "#4c1d95";
+        style = "filled,rounded";
+        fillcolor = "#f5f3ff";
+        color = "#c4b5fd";
+
+        grad [label="Sobel Depth Ridge
+∇D Normalized Magnitude", fillcolor="#ede9fe", color="#8b5cf6"];
+        annulus [label="Annular Boundary Band B
+Depth Bleed Detector", fillcolor="#ede9fe", color="#8b5cf6"];
+        snapping [label="Active Prompt Synthesis &
+Geodesic Snapping", fillcolor="#ddd6fe", color="#7c3aed", style="filled,rounded,bold"];
+    }
+
+    subgraph cluster_output {
+        label = "Final Output";
+        fontname = "Helvetica,Arial,sans-serif";
+        fontcolor = "#1e293b";
+        style = "filled,rounded";
+        fillcolor = "#fef2f2";
+        color = "#fca5a5";
+
+        out_mask [label="High-Precision Mask M*
+(+56% Acc, +12.9% F@2px)", fillcolor="#fee2e2", color="#ef4444", style="filled,rounded,bold"];
+    }
+
+    rgb -> owl;
+    rgb -> da2;
+    owl -> sam2;
+    
+    owl -> proj3d;
+    da2 -> proj3d;
+    da2 -> grad;
+    
+    proj3d -> rel_tensor;
+    query -> gated_score;
+    rel_tensor -> gated_score;
+    
+    sam2 -> annulus;
+    gated_score -> annulus;
+    grad -> snapping;
+    annulus -> snapping;
+    snapping -> out_mask;
+}

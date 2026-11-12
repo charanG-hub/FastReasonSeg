@@ -1,0 +1,27 @@
+benchmark,metric,method,level_1_avg,level_2_avg,level_3_avg,level_4_avg,source_status
+RVTBench (paper Table 2),Region Similarity J,LISA-7B,0.435,0.42,0.398,0.377,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,LISA-13B,0.466,0.452,0.431,0.411,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,VISA-7B,0.429,0.412,0.394,0.372,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,VISA-13B,0.481,0.462,0.443,0.418,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,LLM-Seg,0.13,0.105,0.103,0.097,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,SegZero,0.446,0.423,0.404,0.383,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,CoReS-7B,0.437,0.408,0.401,0.379,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,CoReS-13B,0.451,0.422,0.415,0.393,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,JiT-7B,0.395,0.377,0.361,0.342,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,JiT-API,0.515,0.494,0.474,0.448,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,FastReasonSeg-8B,0.678,0.65,0.624,0.599,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,FastReasonSeg-1.7B-Distill,0.665,0.637,0.611,0.586,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Region Similarity J,FastReasonSeg-0.6B-Distill,0.649,0.62,0.594,0.57,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,LISA-7B,0.408,0.388,0.369,0.343,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,LISA-13B,0.444,0.426,0.405,0.387,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,VISA-7B,0.413,0.396,0.379,0.358,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,VISA-13B,0.463,0.445,0.427,0.402,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,LLM-Seg,0.168,0.143,0.14,0.134,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,SegZero,0.432,0.41,0.39,0.367,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,CoReS-7B,0.422,0.405,0.387,0.364,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,CoReS-13B,0.436,0.419,0.401,0.378,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,JiT-7B,0.381,0.365,0.349,0.329,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,JiT-API,0.496,0.476,0.456,0.431,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,FastReasonSeg-8B,0.659,0.63,0.605,0.579,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,FastReasonSeg-1.7B-Distill,0.646,0.617,0.592,0.566,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements
+RVTBench (paper Table 2),Contour Accuracy F,FastReasonSeg-0.6B-Distill,0.629,0.6,0.576,0.549,Paper Table 2 values; averages across semantic/spatial/temporal categories; not project measurements

@@ -1,0 +1,61 @@
+{
+  "truck_segmentation": {
+    "label": "truck",
+    "detector": "OWLv2",
+    "detector_prompt": "a parked vehicle",
+    "detector_confidence": 0.26908671855926514,
+    "bounding_box_xyxy": [
+      128.78948974609375,
+      271.5691833496094,
+      1360.45751953125,
+      850.9229736328125
+    ],
+    "segmenter": "SAM2.1 Hiera Small",
+    "mask_score": 0.978569746017456,
+    "segmented_pixels": 639940,
+    "image_size": {
+      "width": 1800,
+      "height": 1200
+    },
+    "mask_path": "data/truck_refined_mask.png",
+    "overlay_path": "data/truck_refined_overlay.png",
+    "refined_bounding_box_xyxy": [
+      40.0,
+      280.0,
+      1740.0,
+      920.0
+    ],
+    "detector_bounding_box_xyxy": [
+      128.78948974609375,
+      271.5691833496094,
+      1360.45751953125,
+      850.9229736328125
+    ],
+    "depth_analysis": {
+      "model": "Depth Anything V2 Small",
+      "depth_type": "relative_depth",
+      "mean_depth": 4.187078475952148,
+      "median_depth": 4.270100116729736,
+      "min_depth": 1.0337278842926025,
+      "max_depth": 4.578012466430664,
+      "std_depth": 0.26414135098457336,
+      "pixel_count": 639940
+    }
+  },
+  "video_segmentation": {
+    "input_video": "docs/recovered_results/videos/01_dog.mp4",
+    "output_video": "data/dog_sam2_segmented.mp4",
+    "model": "SAM2.1 Hiera Small",
+    "device": "Apple MPS",
+    "frame_count": 289,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    },
+    "fps": 29.97,
+    "segmentation_status": "completed",
+    "output_validation": "passed",
+    "ground_truth_accuracy": null,
+    "notes": "All frames processed and exported. Ground-truth video segmentation accuracy has not been measured."
+  }
+}

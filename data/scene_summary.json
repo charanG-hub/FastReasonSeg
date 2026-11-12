@@ -1,0 +1,36 @@
+{
+  "image_scene": {
+    "objects": [
+      {
+        "id": "object_1",
+        "label": "truck",
+        "source": "image",
+        "bounding_box_xyxy": [
+          40.0,
+          280.0,
+          1740.0,
+          920.0
+        ],
+        "mask_path": "data/truck_refined_mask.png",
+        "depth_type": "relative_depth",
+        "depth_statistics": {
+          "mean_depth": 4.187078475952148,
+          "median_depth": 4.270100116729736
+        }
+      }
+    ],
+    "relationships": [],
+    "relationship_note": "No spatial relationships inferred yet; they require additional scene analysis."
+  },
+  "video_scene": {
+    "input_video": "docs/recovered_results/videos/01_dog.mp4",
+    "segmented_video": "data/dog_sam2_segmented.mp4",
+    "frame_count": 289,
+    "resolution": {
+      "width": 1280,
+      "height": 720
+    },
+    "segmentation_status": "completed",
+    "relationships": []
+  }
+}

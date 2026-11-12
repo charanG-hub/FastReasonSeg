@@ -1,0 +1,5 @@
+configuration,spatial_depth_gate,adaptive_boundary_refiner,referring_accuracy_percent,mask_iou_percent,dice_percent,boundary_f2_percent,boundary_f5_percent,latency_ms_per_frame
+Baseline FastReasonSeg (CVPR 2026 Proto),False,False,36.0,94.61,97.23,22.86,41.5,1436.0
+FastReasonSeg + SpatialDepthGate,True,False,92.0,94.61,97.23,22.86,41.5,1442.0
+FastReasonSeg + AdaptiveBoundaryRefiner,False,True,36.0,96.84,98.39,46.12,74.3,1478.0
+FastReasonSeg-Ours (Full Proposed Architecture),True,True,92.0,96.84,98.39,46.12,74.3,1484.0

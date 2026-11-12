@@ -9,6 +9,11 @@ import numpy as np
 import streamlit as st
 import torch
 from PIL import Image, ImageDraw
+from fastreasonseg_core import (
+    build_digital_twin,
+    AdaptiveBoundaryRefiner,
+    SpatialDepthGate,
+)
 from transformers import (
     AutoImageProcessor,
     AutoModelForDepthEstimation,
@@ -125,13 +130,7 @@ def detect_objects(image, prompt, threshold=0.15):
 
     # Try multiple descriptions to improve text-guided detection.
     if prompt in {"person", "people", "human"}:
-        candidate_labels = [
-            "person",
-            "a person walking",
-            "a woman walking",
-            "a man walking",
-            "a human body",
-        ]
+        candidate_labels = ["person"]
     else:
         candidate_labels = [
             prompt,
@@ -1162,6 +1161,38 @@ if page == "Image Segmentation":
                             metric_col2.metric("SAM mask score", f"{mask_score:.3f}")
                             metric_col3.metric("Image area", f"{area_percent:.2f}%")
 
+                            if st.button(
+                                f"⚡ Auto-Refine Mask with AdaptiveBoundaryRefiner",
+                                key=f"auto_refine_btn_{index}",
+                                help="Applies depth-gradient edge snapping and bleed suppression.",
+                            ):
+                                try:
+                                    refiner = AdaptiveBoundaryRefiner()
+                                    depth_map_ref = None
+                                    if "depth_image" in st.session_state and st.session_state["depth_image"] is not None:
+                                        depth_map_ref = (
+                                            np.asarray(
+                                                st.session_state["depth_image"].convert("L"),
+                                                dtype=np.float32,
+                                            ) / 255.0
+                                        )
+                                    ref_res = refiner.refine(
+                                        mask=np.asarray(mask).astype(bool),
+                                        depth_map=depth_map_ref,
+                                        box=boxes[index] if index < len(boxes) else None,
+                                    )
+                                    curr_masks = dict(st.session_state.get("multi_candidate_masks", {}))
+                                    curr_masks[index] = ref_res["refined_mask"]
+                                    st.session_state["multi_candidate_masks"] = curr_masks
+                                    st.success(
+                                        f"Candidate {index + 1} refined! "
+                                        f"Area change: {ref_res['area_delta_percent']:+.1f}% | "
+                                        f"Boundary precision: {ref_res['boundary_metrics']['precision']:.2f}"
+                                    )
+                                    st.rerun()
+                                except Exception as exc:
+                                    st.error(f"Auto-refinement error: {exc}")
+
                             mask_buffer = io.BytesIO()
                             individual_mask_image.save(mask_buffer, format="PNG")
                             st.download_button(
@@ -1184,6 +1215,117 @@ if page == "Image Segmentation":
 
 # DEPTH ANALYSIS PAGE
 # =========================================================
+
+
+    # =========================================================
+    # DIGITAL TWIN CONSTRUCTION
+    # =========================================================
+    st.divider()
+    st.subheader("Object-Level Digital Twin")
+
+    if st.button("Build Digital Twin JSON", key="build_digital_twin"):
+        image_for_twin = st.session_state.get("multi_candidate_image")
+        boxes_for_twin = st.session_state.get("multi_candidate_boxes")
+        scores_for_twin = st.session_state.get("multi_candidate_scores")
+        masks_for_twin = st.session_state.get("multi_candidate_masks", {})
+        mask_scores_for_twin = st.session_state.get(
+            "multi_candidate_mask_scores", {}
+        )
+        selected_for_twin = st.session_state.get(
+            "multi_candidate_selection", []
+        )
+        prompt_for_twin = st.session_state.get(
+            "multi_candidate_prompt", "unknown"
+        )
+
+        if image_for_twin is None or boxes_for_twin is None:
+            st.warning("Upload an image and detect objects first.")
+        elif not selected_for_twin:
+            st.warning("Select at least one candidate.")
+        else:
+            available = [
+                i for i in selected_for_twin
+                if i in masks_for_twin and i < len(boxes_for_twin)
+            ]
+
+            if not available:
+                st.warning(
+                    "No selected candidate has a segmentation mask. "
+                    "Run Segment selected candidates first."
+                )
+            else:
+                try:
+                    with st.spinner(
+                        "Estimating depth and building Digital Twin..."
+                    ):
+                        depth_image, depth_statistics = estimate_depth(
+                            image_for_twin
+                        )
+                        depth_map = (
+                            np.asarray(
+                                depth_image.convert("L"),
+                                dtype=np.float32,
+                            ) / 255.0
+                        )
+
+                        detections = []
+
+                        for i in available:
+                            detections.append({
+                                "object_id": f"obj_{i + 1:03d}",
+                                "label": prompt_for_twin,
+                                "confidence": float(scores_for_twin[i]),
+                                "box": np.asarray(
+                                    boxes_for_twin[i], dtype=float
+                                ).tolist(),
+                                "mask": np.asarray(
+                                    masks_for_twin[i], dtype=bool
+                                ),
+                                "segmentation_score": float(
+                                    mask_scores_for_twin.get(i, 0.0)
+                                ),
+                            })
+
+                        twin = build_digital_twin(
+                            image_size=(
+                                image_for_twin.width,
+                                image_for_twin.height,
+                            ),
+                            detections=detections,
+                            depth_map=depth_map,
+                            source="image_segmentation_app",
+                            prompt=prompt_for_twin,
+                        )
+
+                        twin["image"]["depth_statistics"] = (
+                            depth_statistics
+                        )
+
+                        st.session_state["digital_twin_json"] = twin
+
+                    st.success(
+                        f"Digital Twin created for "
+                        f"{twin['object_count']} object(s)."
+                    )
+
+                except Exception as exc:
+                    st.error(f"Digital Twin construction failed: {exc}")
+                    st.code(traceback.format_exc())
+
+    if "digital_twin_json" in st.session_state:
+        twin = st.session_state["digital_twin_json"]
+
+        st.subheader("Digital Twin JSON Preview")
+        st.json(twin)
+
+        st.download_button(
+            "Download Digital Twin JSON",
+            data=json.dumps(twin, indent=2),
+            file_name="fastreasonseg_digital_twin.json",
+            mime="application/json",
+            key="download_digital_twin_json",
+        )
+
 
 elif page == "Depth Analysis":
 

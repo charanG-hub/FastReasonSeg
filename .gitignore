@@ -1,0 +1,17 @@
+.venv/
+.venv*/
+__pycache__/
+.DS_Store
+.env
+.streamlit/secrets.toml
+*.mp4
+*.mov
+*.pth
+*.pt
+*.ckpt
+*.aux
+*.log
+*.out
+main.pdf
+*.npy
+

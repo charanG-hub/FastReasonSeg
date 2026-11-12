@@ -1,0 +1,59 @@
+{
+  "base_model": "Qwen/Qwen3-0.6B",
+  "adapter_path": "models/final_adapter",
+  "device": "mps",
+  "test_count": 5,
+  "results": [
+    {
+      "id": "object_grounding",
+      "category": "Object grounding",
+      "prompt": "Scene description: A red car is parked on the left. A blue truck is parked on the right. Question: Which object is on the right? Answer using the provided scene only.",
+      "expected": "blue truck",
+      "base_output": "The object on the right is a blue truck.",
+      "base_seconds": 0.85,
+      "adapter_output": "The object on the right is a blue truck.",
+      "adapter_seconds": 0.68
+    },
+    {
+      "id": "segmentation_plan",
+      "category": "Segmentation planning",
+      "prompt": "A detector returns a bounding box for a dog in an image. Describe a concise, ordered pipeline using a segmentation model to obtain a binary mask. Return four numbered steps. Do not claim that you have processed an actual image.",
+      "expected": "ordered pipeline with a mask output",
+      "base_output": "1. **Segmentation Model Input**: The detector returns a bounding box for a dog in the image.  \n2. **Mask Generation**: The segmentation model processes the bounding box to generate a binary mask.  \n3. **Mask Validation**: The binary mask is validated to ensure it correctly identifies the dog.  \n4. **Mask Output**: The final binary mask is output for further processing.",
+      "base_seconds": 4.05,
+      "adapter_output": "1. **Segmentation Model Input**: The detector returns a bounding box for a dog in the image.  \n2. **Mask Generation**: The segmentation model is applied to the image to generate a binary mask of the dog.  \n3. **Mask Validation**: The generated mask is validated to ensure it correctly identifies the dog.  \n4. **Binary Mask Output**: The final binary mask is used to classify the dog in the image.",
+      "adapter_seconds": 4.65
+    },
+    {
+      "id": "temporal_reasoning",
+      "category": "Temporal reasoning",
+      "prompt": "A tracked object's center is at x=100 in frame 1, x=115 in frame 2, and x=130 in frame 3. Assuming the same image coordinate system, describe its horizontal movement and the displacement per frame.",
+      "expected": "rightward; 15 pixels per frame",
+      "base_output": "The object's horizontal movement is from 100 to 130, a displacement of 30 units per frame.",
+      "base_seconds": 1.36,
+      "adapter_output": "The object's horizontal movement is from 100 to 130, a displacement of 30 units per frame.",
+      "adapter_seconds": 1.51
+    },
+    {
+      "id": "spatial_reasoning",
+      "category": "Spatial reasoning",
+      "prompt": "Object A has bounding box [10, 20, 50, 60]. Object B has bounding box [70, 20, 110, 60]. Coordinates are [x1, y1, x2, y2]. Which object is farther to the right? Explain briefly.",
+      "expected": "Object B",
+      "base_output": "Object A is farther to the right than Object B.",
+      "base_seconds": 0.64,
+      "adapter_output": "Object A is farther to the right than Object B.",
+      "adapter_seconds": 0.75
+    },
+    {
+      "id": "uncertainty",
+      "category": "Uncertainty handling",
+      "prompt": "You are given no image, no video, and no detector output. The user asks: What objects are in the scene? Answer accurately without inventing observations.",
+      "expected": "states that the scene cannot be determined",
+      "base_output": "The scene contains no objects.",
+      "base_seconds": 0.36,
+      "adapter_output": "The scene contains no objects.",
+      "adapter_seconds": 0.4
+    }
+  ],
+  "evaluation_note": "Outputs require human review. This text-only test does not measure image/video segmentation accuracy."
+}

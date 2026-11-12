@@ -1,0 +1,4 @@
+sequence,csv,frames,iou_count,mean_iou,median_iou,dice_count,mean_dice,median_dice,timing_count,mean_seconds_per_frame,detections,errors
+Bear,/Users/charankumar/Documents/FastReasonSeg/data/bear_benchmark/results.csv,82,82,0.9660159878048781,0.9666935,82,0.9827056585365853,0.9830650000000001,82,1.3793536585365853,82,0
+Car-turn,/Users/charankumar/Documents/FastReasonSeg/data/car_turn_benchmark/results.csv,80,80,0.976261,0.9806965000000001,80,0.987946875,0.990254,80,1.4937375,80,0
+Bear-evaluation,/Users/charankumar/Documents/FastReasonSeg/data/bear_evaluation/results.csv,5,0,,,0,,,0,,5,0

@@ -1,0 +1,911 @@
+{
+  "model": "Qwen/Qwen3-0.6B",
+  "adapter_path": "/Users/charankumar/Documents/FastReasonSeg/models/final_adapter",
+  "device": "mps",
+  "evaluation_count": 20,
+  "note": "Small authored diagnostic set, not a robust benchmark. Rule-based scores require manual review. The adapter comparison does not establish research-paper reproduction.",
+  "base_summary": {
+    "passed": 6,
+    "total": 20,
+    "accuracy": 0.3,
+    "by_category": {
+      "motion_calculation": {
+        "passed": 1,
+        "total": 4,
+        "accuracy": 0.25
+      },
+      "spatial_reasoning": {
+        "passed": 3,
+        "total": 4,
+        "accuracy": 0.75
+      },
+      "segmentation_metrics": {
+        "passed": 0,
+        "total": 4,
+        "accuracy": 0.0
+      },
+      "temporal_reasoning": {
+        "passed": 2,
+        "total": 4,
+        "accuracy": 0.5
+      },
+      "uncertainty": {
+        "passed": 0,
+        "total": 4,
+        "accuracy": 0.0
+      }
+    }
+  },
+  "adapter_summary": {
+    "passed": 5,
+    "total": 20,
+    "accuracy": 0.25,
+    "by_category": {
+      "motion_calculation": {
+        "passed": 1,
+        "total": 4,
+        "accuracy": 0.25
+      },
+      "spatial_reasoning": {
+        "passed": 2,
+        "total": 4,
+        "accuracy": 0.5
+      },
+      "segmentation_metrics": {
+        "passed": 0,
+        "total": 4,
+        "accuracy": 0.0
+      },
+      "temporal_reasoning": {
+        "passed": 2,
+        "total": 4,
+        "accuracy": 0.5
+      },
+      "uncertainty": {
+        "passed": 0,
+        "total": 4,
+        "accuracy": 0.0
+      }
+    }
+  },
+  "results": [
+    {
+      "index": 1,
+      "category": "motion_calculation",
+      "question": "An object's center moves by dx=3 pixels and dy=4 pixels between two frames. What is its displacement?",
+      "reference_answer": "5 pixels",
+      "base_output": "<think>\nOkay, let's see. The problem says an object's center moves by dx=3 pixels and dy=4 pixels between two frames. I need to find its displacement.\n\nHmm, displacement in physics usually refers to the net change from one point to another. So if the object moves 3 pixels in the x-direction and 4 pixels in the y-direction, then the total displacement should be the vector sum of these two changes.\n\nWait, displacement is a vector quantity, right? So",
+      "adapter_output": "<think>\nOkay, let's see. The problem says an object's center moves by dx=3 pixels and dy=4 pixels between two frames. I need to find its displacement.\n\nHmm, displacement in physics usually refers to the net change in position. So if it moves 3 pixels in one direction and 4 pixels in another, the total displacement would be the vector sum of those two changes. \n\nWait, displacement is a vector quantity, right? So dx and dy are both vectors.",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says an object's center moves by dx=3 pixels and dy=4 pixels between two frames. I need to find its displacement.\n\nHmm, displacement in physics usually refers to the net change from one point to another. So if the object moves 3 pixels in the x-direction and 4 pixels in the y-direction, then the total displacement should be the vector sum of these two changes.\n\nWait, displacement is a vector quantity, right? So",
+        "numbers_found": [
+          3.0,
+          4.0,
+          3.0,
+          4.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 5.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 5.0; numbers=[3.0, 4.0, 3.0, 4.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says an object's center moves by dx=3 pixels and dy=4 pixels between two frames. I need to find its displacement.\n\nHmm, displacement in physics usually refers to the net change in position. So if it moves 3 pixels in one direction and 4 pixels in another, the total displacement would be the vector sum of those two changes. \n\nWait, displacement is a vector quantity, right? So dx and dy are both vectors.",
+        "numbers_found": [
+          3.0,
+          4.0,
+          3.0,
+          4.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 5.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 5.0; numbers=[3.0, 4.0, 3.0, 4.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 2,
+      "category": "motion_calculation",
+      "question": "An object's center moves by dx=-5 pixels and dy=12 pixels. Calculate its displacement magnitude.",
+      "reference_answer": "13 pixels",
+      "base_output": "<think>\nOkay, let's see. The problem says an object's center moves by dx=-5 pixels and dy=12 pixels. I need to calculate its displacement magnitude.\n\nFirst, displacement magnitude usually refers to the straight-line distance from the starting point to the ending point. Since both dx and dy are given, I can use the Pythagorean theorem here. The formula for displacement magnitude is sqrt(dx\u00b2 + dy\u00b2). \n\nSo plugging in the values: dx is -5,",
+      "adapter_output": "<think>\nOkay, let's see. The problem says an object's center moves by dx=-5 pixels and dy=12 pixels. I need to find the displacement magnitude.\n\nFirst, displacement magnitude usually refers to the straight-line distance from the starting point to the ending point. Since both dx and dy are given, I can use the Pythagorean theorem here. The formula for displacement magnitude is sqrt(dx\u00b2 + dy\u00b2). \n\nSo plugging in the values: dx is -5,",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says an object's center moves by dx=-5 pixels and dy=12 pixels. I need to calculate its displacement magnitude.\n\nFirst, displacement magnitude usually refers to the straight-line distance from the starting point to the ending point. Since both dx and dy are given, I can use the Pythagorean theorem here. The formula for displacement magnitude is sqrt(dx\u00b2 + dy\u00b2). \n\nSo plugging in the values: dx is -5,",
+        "numbers_found": [
+          -5.0,
+          12.0,
+          -5.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 13.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 13.0; numbers=[-5.0, 12.0, -5.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says an object's center moves by dx=-5 pixels and dy=12 pixels. I need to find the displacement magnitude.\n\nFirst, displacement magnitude usually refers to the straight-line distance from the starting point to the ending point. Since both dx and dy are given, I can use the Pythagorean theorem here. The formula for displacement magnitude is sqrt(dx\u00b2 + dy\u00b2). \n\nSo plugging in the values: dx is -5,",
+        "numbers_found": [
+          -5.0,
+          12.0,
+          -5.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 13.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 13.0; numbers=[-5.0, 12.0, -5.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 3,
+      "category": "motion_calculation",
+      "question": "An object moves from center (10, 20) to center (16, 28). What is the displacement magnitude?",
+      "reference_answer": "10 pixels",
+      "base_output": "<think>\nOkay, let's see. The problem says an object moves from the center (10, 20) to (16, 28). I need to find the displacement magnitude. Hmm, displacement is the straight-line distance between two points, right? So first, I should figure out the change in x and the change in y.\n\nThe original position is (10, 20), and the final position is (16, 28). The difference",
+      "adapter_output": "<think>\nOkay, let's see. The problem says an object moves from the center (10, 20) to (16, 28). I need to find the displacement magnitude. Hmm, displacement is the straight-line distance between two points, right? So first, I should figure out the difference in the x-coordinates and the y-coordinates.\n\nStarting with the x-coordinate: 16 minus 10 is 6. Then for the y-coordinate,",
+      "base_score": {
+        "passed": true,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says an object moves from the center (10, 20) to (16, 28). I need to find the displacement magnitude. Hmm, displacement is the straight-line distance between two points, right? So first, I should figure out the change in x and the change in y.\n\nThe original position is (10, 20), and the final position is (16, 28). The difference",
+        "numbers_found": [
+          10.0,
+          20.0,
+          16.0,
+          28.0,
+          10.0,
+          20.0,
+          16.0,
+          28.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 10.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 10.0; numbers=[10.0, 20.0, 16.0, 28.0, 10.0, 20.0, 16.0, 28.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": true,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says an object moves from the center (10, 20) to (16, 28). I need to find the displacement magnitude. Hmm, displacement is the straight-line distance between two points, right? So first, I should figure out the difference in the x-coordinates and the y-coordinates.\n\nStarting with the x-coordinate: 16 minus 10 is 6. Then for the y-coordinate,",
+        "numbers_found": [
+          10.0,
+          20.0,
+          16.0,
+          28.0,
+          16.0,
+          10.0,
+          6.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 10.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 10.0; numbers=[10.0, 20.0, 16.0, 28.0, 16.0, 10.0, 6.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 4,
+      "category": "motion_calculation",
+      "question": "An object's center moves from x=80 to x=50 in one frame interval. What is the horizontal displacement?",
+      "reference_answer": "-30 pixels; the object moved left in image coordinates",
+      "base_output": "<think>\nOkay, let's see. The problem says an object's center moves from x=80 to x=50 in one frame interval. I need to find the horizontal displacement.\n\nHmm, displacement is the change in position. So, displacement equals the final position minus the initial position. Right, so if it goes from 80 to 50, that means it's moving left. \n\nWait, displacement is a vector quantity, but since they just ask for displacement, maybe",
+      "adapter_output": "<think>\nOkay, let's see. The problem says an object's center moves from x=80 to x=50 in one frame interval. I need to find the horizontal displacement.\n\nHmm, displacement is the change in position. So, displacement equals the final position minus the initial position. Right, so if it goes from 80 to 50, that means it's moving left by 30 units. Let me check: 80 minus 50 is",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "signed_direction",
+        "response": "<think>\nOkay, let's see. The problem says an object's center moves from x=80 to x=50 in one frame interval. I need to find the horizontal displacement.\n\nHmm, displacement is the change in position. So, displacement equals the final position minus the initial position. Right, so if it goes from 80 to 50, that means it's moving left. \n\nWait, displacement is a vector quantity, but since they just ask for displacement, maybe",
+        "numbers_found": [
+          80.0,
+          50.0,
+          80.0,
+          50.0
+        ],
+        "expected": {
+          "type": "signed_direction",
+          "expected": -30.0,
+          "tolerance": 0.05,
+          "direction": "left"
+        },
+        "reason": "Expected -30.0; numbers=[80.0, 50.0, 80.0, 50.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "signed_direction",
+        "response": "<think>\nOkay, let's see. The problem says an object's center moves from x=80 to x=50 in one frame interval. I need to find the horizontal displacement.\n\nHmm, displacement is the change in position. So, displacement equals the final position minus the initial position. Right, so if it goes from 80 to 50, that means it's moving left by 30 units. Let me check: 80 minus 50 is",
+        "numbers_found": [
+          80.0,
+          50.0,
+          80.0,
+          50.0,
+          30.0,
+          80.0,
+          50.0
+        ],
+        "expected": {
+          "type": "signed_direction",
+          "expected": -30.0,
+          "tolerance": 0.05,
+          "direction": "left"
+        },
+        "reason": "Expected -30.0; numbers=[80.0, 50.0, 80.0, 50.0, 30.0, 80.0, 50.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 5,
+      "category": "spatial_reasoning",
+      "question": "Object A has bounding box [10, 10, 30, 30]. Object B has bounding box [50, 10, 90, 30]. Which object has the greater horizontal center coordinate?",
+      "reference_answer": "Object B. A's center x is 20; B's center x is 70.",
+      "base_output": "<think>\nOkay, let's see. The problem is about comparing the horizontal center coordinates of two objects, A and B. \n\nFirst, I need to recall how bounding boxes work. A bounding box is a rectangle that encloses an object. The coordinates given for Object A are [10, 10, 30, 30], and for Object B it's [50, 10, 90, 30]. \n\nThe horizontal center coordinate...",
+      "adapter_output": "<think>\nOkay, let's see. The problem is about comparing the horizontal center coordinates of two objects. \n\nFirst, I need to recall how bounding boxes work. Each object has its own bounding box, which is defined by its top-left and bottom-right coordinates. The horizontal center coordinate would be the average of the left and right edges of the box.\n\nLooking at Object A: the coordinates are [10, 10, 30, 30]. Wait, but usually,",
+      "base_score": {
+        "passed": true,
+        "scoring_type": "choice",
+        "response": "<think>\nOkay, let's see. The problem is about comparing the horizontal center coordinates of two objects, A and B. \n\nFirst, I need to recall how bounding boxes work. A bounding box is a rectangle that encloses an object. The coordinates given for Object A are [10, 10, 30, 30], and for Object B it's [50, 10, 90, 30]. \n\nThe horizontal center coordinate...",
+        "numbers_found": [
+          10.0,
+          10.0,
+          30.0,
+          30.0,
+          50.0,
+          10.0,
+          90.0,
+          30.0
+        ],
+        "expected": {
+          "type": "choice",
+          "expected": "B"
+        },
+        "reason": "Expected Object B; detected=B"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "choice",
+        "response": "<think>\nOkay, let's see. The problem is about comparing the horizontal center coordinates of two objects. \n\nFirst, I need to recall how bounding boxes work. Each object has its own bounding box, which is defined by its top-left and bottom-right coordinates. The horizontal center coordinate would be the average of the left and right edges of the box.\n\nLooking at Object A: the coordinates are [10, 10, 30, 30]. Wait, but usually,",
+        "numbers_found": [
+          10.0,
+          10.0,
+          30.0,
+          30.0
+        ],
+        "expected": {
+          "type": "choice",
+          "expected": "B"
+        },
+        "reason": "Expected Object B; detected=A"
+      }
+    },
+    {
+      "index": 6,
+      "category": "spatial_reasoning",
+      "question": "Object A has bounding box [60, 0, 100, 40]. Object B has bounding box [10, 0, 30, 40]. Which object has the greater horizontal center coordinate?",
+      "reference_answer": "Object A. A's center x is 80; B's center x is 20.",
+      "base_output": "<think>\nOkay, let's see. The problem is about comparing the horizontal center coordinates of two objects, A and B. \n\nFirst, I need to recall how bounding boxes work. A bounding box is a rectangle that encloses an object. The coordinates given for Object A are [60, 0, 100, 40], and for Object B it's [10, 0, 30, 40]. \n\nThe horizontal center coordinate... Hmm",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking which object has a greater horizontal center coordinate between Object A and Object B.\n\nFirst, I need to recall how bounding boxes work. The bounding box coordinates usually represent the top-left and bottom-right corners of the rectangle. But wait, sometimes people might refer to the center as the average of the left and right edges. Let me check the given data.\n\nObject A's bounding box is [60, 0, 100,",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "choice",
+        "response": "<think>\nOkay, let's see. The problem is about comparing the horizontal center coordinates of two objects, A and B. \n\nFirst, I need to recall how bounding boxes work. A bounding box is a rectangle that encloses an object. The coordinates given for Object A are [60, 0, 100, 40], and for Object B it's [10, 0, 30, 40]. \n\nThe horizontal center coordinate... Hmm",
+        "numbers_found": [
+          60.0,
+          0.0,
+          100.0,
+          40.0,
+          10.0,
+          0.0,
+          30.0,
+          40.0
+        ],
+        "expected": {
+          "type": "choice",
+          "expected": "A"
+        },
+        "reason": "Expected Object A; detected=B"
+      },
+      "adapter_score": {
+        "passed": true,
+        "scoring_type": "choice",
+        "response": "<think>\nOkay, let's see. The user is asking which object has a greater horizontal center coordinate between Object A and Object B.\n\nFirst, I need to recall how bounding boxes work. The bounding box coordinates usually represent the top-left and bottom-right corners of the rectangle. But wait, sometimes people might refer to the center as the average of the left and right edges. Let me check the given data.\n\nObject A's bounding box is [60, 0, 100,",
+        "numbers_found": [
+          60.0,
+          0.0,
+          100.0
+        ],
+        "expected": {
+          "type": "choice",
+          "expected": "A"
+        },
+        "reason": "Expected Object A; detected=A"
+      }
+    },
+    {
+      "index": 7,
+      "category": "spatial_reasoning",
+      "question": "Object A has bounding box [0, 0, 20, 20]. Object B has bounding box [0, 40, 20, 60]. Which object has the greater vertical center coordinate?",
+      "reference_answer": "Object B. A's center y is 10; B's center y is 50.",
+      "base_output": "<think>\nOkay, let's see. The problem is about comparing the vertical centers of two objects. Object A has a bounding box from (0,0) to (20,20), so its vertical center would be the middle of the height. Since the width is 20, the vertical center is 10. Object B has a bounding box from (0,40) to (20,60), which is 20 units wide and 20",
+      "adapter_output": "<think>\nOkay, let's see. The problem is about comparing the vertical centers of two objects. Object A has a bounding box from (0,0) to (20,20), so its vertical center would be the middle of that. Wait, the bounding box is usually defined as left, top, right, bottom. So if it's [0,0,20,20], then the vertical center would be (0 + 20)/2 = 1",
+      "base_score": {
+        "passed": true,
+        "scoring_type": "choice",
+        "response": "<think>\nOkay, let's see. The problem is about comparing the vertical centers of two objects. Object A has a bounding box from (0,0) to (20,20), so its vertical center would be the middle of the height. Since the width is 20, the vertical center is 10. Object B has a bounding box from (0,40) to (20,60), which is 20 units wide and 20",
+        "numbers_found": [
+          0.0,
+          0.0,
+          20.0,
+          20.0,
+          20.0,
+          10.0,
+          0.0,
+          40.0,
+          20.0,
+          60.0,
+          20.0,
+          20.0
+        ],
+        "expected": {
+          "type": "choice",
+          "expected": "B"
+        },
+        "reason": "Expected Object B; detected=B"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "choice",
+        "response": "<think>\nOkay, let's see. The problem is about comparing the vertical centers of two objects. Object A has a bounding box from (0,0) to (20,20), so its vertical center would be the middle of that. Wait, the bounding box is usually defined as left, top, right, bottom. So if it's [0,0,20,20], then the vertical center would be (0 + 20)/2 = 1",
+        "numbers_found": [
+          0.0,
+          0.0,
+          20.0,
+          20.0,
+          0.0,
+          0.0,
+          20.0,
+          20.0,
+          0.0,
+          20.0,
+          2.0,
+          1.0
+        ],
+        "expected": {
+          "type": "choice",
+          "expected": "B"
+        },
+        "reason": "Expected Object B; detected=A"
+      }
+    },
+    {
+      "index": 8,
+      "category": "spatial_reasoning",
+      "question": "Object A has bounding box [0, 0, 40, 40]. Object B has bounding box [10, 10, 30, 30]. Which bounding box has the larger area?",
+      "reference_answer": "Object A. A's area is 1600 square pixels; B's area is 400 square pixels.",
+      "base_output": "<think>\nOkay, let's see. The user is asking which of the two bounding boxes has a larger area. \n\nFirst, I need to recall how to calculate the area of a rectangle. The formula for the area of a rectangle is length multiplied by width. Each bounding box is given as coordinates, so I should figure out the length and width from those.\n\nLooking at Object A: the coordinates are [0, 0, 40, 40]. So, the width is",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking which of the two bounding boxes has a larger area. \n\nFirst, I need to recall how to calculate the area of a rectangle. The formula for the area of a rectangle is length multiplied by width. Each bounding box is given as coordinates, so I should figure out the length and width from those.\n\nLooking at Object A: the coordinates are [0, 0, 40, 40]. Wait, the first number",
+      "base_score": {
+        "passed": true,
+        "scoring_type": "choice",
+        "response": "<think>\nOkay, let's see. The user is asking which of the two bounding boxes has a larger area. \n\nFirst, I need to recall how to calculate the area of a rectangle. The formula for the area of a rectangle is length multiplied by width. Each bounding box is given as coordinates, so I should figure out the length and width from those.\n\nLooking at Object A: the coordinates are [0, 0, 40, 40]. So, the width is",
+        "numbers_found": [
+          0.0,
+          0.0,
+          40.0,
+          40.0
+        ],
+        "expected": {
+          "type": "choice",
+          "expected": "A"
+        },
+        "reason": "Expected Object A; detected=A"
+      },
+      "adapter_score": {
+        "passed": true,
+        "scoring_type": "choice",
+        "response": "<think>\nOkay, let's see. The user is asking which of the two bounding boxes has a larger area. \n\nFirst, I need to recall how to calculate the area of a rectangle. The formula for the area of a rectangle is length multiplied by width. Each bounding box is given as coordinates, so I should figure out the length and width from those.\n\nLooking at Object A: the coordinates are [0, 0, 40, 40]. Wait, the first number",
+        "numbers_found": [
+          0.0,
+          0.0,
+          40.0,
+          40.0
+        ],
+        "expected": {
+          "type": "choice",
+          "expected": "A"
+        },
+        "reason": "Expected Object A; detected=A"
+      }
+    },
+    {
+      "index": 9,
+      "category": "segmentation_metrics",
+      "question": "A predicted mask contains 80 pixels, the ground-truth mask contains 100 pixels, and their intersection contains 60 pixels. What is IoU?",
+      "reference_answer": "60 / (80 + 100 - 60) = 0.5, or 50%.",
+      "base_output": "<think>\nOkay, let's see. The user is asking about the Intersection Over Union (IoU) of two masks. They mentioned that a predicted mask has 80 pixels, the ground-truth has 100, and their intersection is 60.\n\nFirst, I remember that IoU is calculated by dividing the intersection area by the union area. The formula is IoU = (Intersection) / (Union). But wait, how do I find the union here?\n\nThe union",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking about the Intersection Over Union (IoU) of two masks. They provided that a predicted mask has 80 pixels, the ground-truth has 100, and their intersection is 60.\n\nFirst, I remember that IoU is calculated by dividing the intersection area by the union area. The formula is IoU = (Intersection) / (Union). But wait, how do I find the union here?\n\nThe union",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The user is asking about the Intersection Over Union (IoU) of two masks. They mentioned that a predicted mask has 80 pixels, the ground-truth has 100, and their intersection is 60.\n\nFirst, I remember that IoU is calculated by dividing the intersection area by the union area. The formula is IoU = (Intersection) / (Union). But wait, how do I find the union here?\n\nThe union",
+        "numbers_found": [
+          80.0,
+          100.0,
+          60.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.5,
+          "tolerance": 0.005
+        },
+        "reason": "Expected 0.5; numbers=[80.0, 100.0, 60.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The user is asking about the Intersection Over Union (IoU) of two masks. They provided that a predicted mask has 80 pixels, the ground-truth has 100, and their intersection is 60.\n\nFirst, I remember that IoU is calculated by dividing the intersection area by the union area. The formula is IoU = (Intersection) / (Union). But wait, how do I find the union here?\n\nThe union",
+        "numbers_found": [
+          80.0,
+          100.0,
+          60.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.5,
+          "tolerance": 0.005
+        },
+        "reason": "Expected 0.5; numbers=[80.0, 100.0, 60.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 10,
+      "category": "segmentation_metrics",
+      "question": "A predicted mask contains 80 pixels, the ground-truth mask contains 100 pixels, and their intersection contains 60 pixels. What is Dice score?",
+      "reference_answer": "2 * 60 / (80 + 100) = 0.6667, approximately 66.67%.",
+      "base_output": "<think>\nOkay, let's see. The user is asking about the Dice score given some pixel counts. The predicted mask has 80 pixels, the ground-truth has 100, and their intersection is 60.\n\nFirst, I remember that the Dice score measures the similarity between two masks. The formula for Dice is (TP + FP + TN) / (TP + TN + FP), where TP is the true positives, FP is false positives, TN is true negatives,",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking about the Dice score given some pixel counts. The predicted mask has 80 pixels, the ground-truth has 100, and their intersection is 60.\n\nFirst, I remember that the Dice score measures the similarity between two masks. The formula for Dice score is (TP + FP + TN) / (TP + TN + FP), where TP is the true positives, FP is false positives, TN is true negatives",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The user is asking about the Dice score given some pixel counts. The predicted mask has 80 pixels, the ground-truth has 100, and their intersection is 60.\n\nFirst, I remember that the Dice score measures the similarity between two masks. The formula for Dice is (TP + FP + TN) / (TP + TN + FP), where TP is the true positives, FP is false positives, TN is true negatives,",
+        "numbers_found": [
+          80.0,
+          100.0,
+          60.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.6666666666666666,
+          "tolerance": 0.005
+        },
+        "reason": "Expected 0.6666666666666666; numbers=[80.0, 100.0, 60.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The user is asking about the Dice score given some pixel counts. The predicted mask has 80 pixels, the ground-truth has 100, and their intersection is 60.\n\nFirst, I remember that the Dice score measures the similarity between two masks. The formula for Dice score is (TP + FP + TN) / (TP + TN + FP), where TP is the true positives, FP is false positives, TN is true negatives",
+        "numbers_found": [
+          80.0,
+          100.0,
+          60.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.6666666666666666,
+          "tolerance": 0.005
+        },
+        "reason": "Expected 0.6666666666666666; numbers=[80.0, 100.0, 60.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 11,
+      "category": "segmentation_metrics",
+      "question": "A predicted mask and a ground-truth mask have an intersection of 40 pixels and a union of 50 pixels. Calculate IoU.",
+      "reference_answer": "40 / 50 = 0.8, or 80%.",
+      "base_output": "<think>\nOkay, let's see. The user is asking to calculate the Intersection Over Union (IoU) given that there's a predicted mask and a ground-truth mask. The problem states that their intersection is 40 pixels and the union is 50 pixels.\n\nFirst, I remember that IoU is calculated as the intersection between the two masks divided by the union. The formula is IoU = (Intersection) / (Union). So, if the intersection is 40 and",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking to calculate the Intersection Over Union (IoU) given that a predicted mask and a ground-truth mask have an intersection of 40 pixels and a union of 50 pixels.\n\nFirst, I remember that IoU is calculated as the intersection of two masks divided by their union. The formula is IoU = (Intersection) / (Union). \n\nSo, if the intersection is 40 and the union is 50",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The user is asking to calculate the Intersection Over Union (IoU) given that there's a predicted mask and a ground-truth mask. The problem states that their intersection is 40 pixels and the union is 50 pixels.\n\nFirst, I remember that IoU is calculated as the intersection between the two masks divided by the union. The formula is IoU = (Intersection) / (Union). So, if the intersection is 40 and",
+        "numbers_found": [
+          40.0,
+          50.0,
+          40.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.8,
+          "tolerance": 0.005
+        },
+        "reason": "Expected 0.8; numbers=[40.0, 50.0, 40.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The user is asking to calculate the Intersection Over Union (IoU) given that a predicted mask and a ground-truth mask have an intersection of 40 pixels and a union of 50 pixels.\n\nFirst, I remember that IoU is calculated as the intersection of two masks divided by their union. The formula is IoU = (Intersection) / (Union). \n\nSo, if the intersection is 40 and the union is 50",
+        "numbers_found": [
+          40.0,
+          50.0,
+          40.0,
+          50.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.8,
+          "tolerance": 0.005
+        },
+        "reason": "Expected 0.8; numbers=[40.0, 50.0, 40.0, 50.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 12,
+      "category": "segmentation_metrics",
+      "question": "The predicted and ground-truth masks are identical and contain 250 foreground pixels. What are their IoU and Dice scores?",
+      "reference_answer": "IoU = 1.0 (100%); Dice = 1.0 (100%).",
+      "base_output": "<think>\nOkay, let's see. The user is asking about the IoU and Dice scores of the predicted and ground-truth masks. Both have 250 foreground pixels each. \n\nFirst, I need to recall what IoU and Dice are. IoU stands for Intersection over Union, which measures how well two objects overlap. It's calculated as the area of the intersection divided by the sum of the areas of the intersection and the union. Since both masks have the same number of foreground",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking about the IoU and Dice scores of two masks that are identical and have 250 foreground pixels each. \n\nFirst, I need to recall what IoU and Dice are. IoU stands for Intersection over Union, which measures the overlap between two objects. Since the masks are identical, their intersection should be maximized. The union would then be the sum of the individual areas minus the intersection. But since they're the same,",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "two_numeric",
+        "response": "<think>\nOkay, let's see. The user is asking about the IoU and Dice scores of the predicted and ground-truth masks. Both have 250 foreground pixels each. \n\nFirst, I need to recall what IoU and Dice are. IoU stands for Intersection over Union, which measures how well two objects overlap. It's calculated as the area of the intersection divided by the sum of the areas of the intersection and the union. Since both masks have the same number of foreground",
+        "numbers_found": [
+          250.0
+        ],
+        "expected": {
+          "type": "two_numeric",
+          "expected": [
+            1.0,
+            1.0
+          ],
+          "tolerance": 0.005
+        },
+        "reason": "Expected two values [1.0, 1.0]; numbers=[250.0]"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "two_numeric",
+        "response": "<think>\nOkay, let's see. The user is asking about the IoU and Dice scores of two masks that are identical and have 250 foreground pixels each. \n\nFirst, I need to recall what IoU and Dice are. IoU stands for Intersection over Union, which measures the overlap between two objects. Since the masks are identical, their intersection should be maximized. The union would then be the sum of the individual areas minus the intersection. But since they're the same,",
+        "numbers_found": [
+          250.0
+        ],
+        "expected": {
+          "type": "two_numeric",
+          "expected": [
+            1.0,
+            1.0
+          ],
+          "tolerance": 0.005
+        },
+        "reason": "Expected two values [1.0, 1.0]; numbers=[250.0]"
+      }
+    },
+    {
+      "index": 13,
+      "category": "temporal_reasoning",
+      "question": "An object's horizontal center is x=100 at frame 2 and x=130 at frame 4. What is its average horizontal displacement per frame interval?",
+      "reference_answer": "(130 - 100) / (4 - 2) = 15 pixels per frame interval to the right.",
+      "base_output": "<think>\nOkay, let's see. The problem says that an object's horizontal center is 100 at frame 2 and 130 at frame 4. We need to find the average horizontal displacement per frame interval.\n\nFirst, I remember that average displacement over a period is the total change in position divided by the number of intervals. Since there are two frames given, frame 2 and frame 4, there's a time interval between them. Let me figure out how many",
+      "adapter_output": "<think>\nOkay, let's see. The problem says an object's horizontal center is 100 at frame 2 and 130 at frame 4. I need to find the average horizontal displacement per frame interval.\n\nFirst, I remember that average displacement over a period is the total change in position divided by the number of frames. So, the total change would be the difference between the final position and the initial position. \n\nThe initial position at frame 2 is 10",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "numeric_direction",
+        "response": "<think>\nOkay, let's see. The problem says that an object's horizontal center is 100 at frame 2 and 130 at frame 4. We need to find the average horizontal displacement per frame interval.\n\nFirst, I remember that average displacement over a period is the total change in position divided by the number of intervals. Since there are two frames given, frame 2 and frame 4, there's a time interval between them. Let me figure out how many",
+        "numbers_found": [
+          100.0,
+          2.0,
+          130.0,
+          4.0,
+          2.0,
+          4.0
+        ],
+        "expected": {
+          "type": "numeric_direction",
+          "expected": 15.0,
+          "tolerance": 0.05,
+          "direction": "right"
+        },
+        "reason": "Expected 15.0; numbers=[100.0, 2.0, 130.0, 4.0, 2.0, 4.0]; direction_ok=False"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "numeric_direction",
+        "response": "<think>\nOkay, let's see. The problem says an object's horizontal center is 100 at frame 2 and 130 at frame 4. I need to find the average horizontal displacement per frame interval.\n\nFirst, I remember that average displacement over a period is the total change in position divided by the number of frames. So, the total change would be the difference between the final position and the initial position. \n\nThe initial position at frame 2 is 10",
+        "numbers_found": [
+          100.0,
+          2.0,
+          130.0,
+          4.0,
+          2.0,
+          10.0
+        ],
+        "expected": {
+          "type": "numeric_direction",
+          "expected": 15.0,
+          "tolerance": 0.05,
+          "direction": "right"
+        },
+        "reason": "Expected 15.0; numbers=[100.0, 2.0, 130.0, 4.0, 2.0, 10.0]; direction_ok=False"
+      }
+    },
+    {
+      "index": 14,
+      "category": "temporal_reasoning",
+      "question": "Consecutive-frame mask IoUs are 0.8, 0.6, and 1.0. What is their arithmetic mean?",
+      "reference_answer": "(0.8 + 0.6 + 1.0) / 3 = 0.8.",
+      "base_output": "<think>\nOkay, let's see. The user is asking for the arithmetic mean of consecutive-frame mask IoUs: 0.8, 0.6, and 1.0.\n\nFirst, I remember that the arithmetic mean is calculated by adding all the numbers together and then dividing by the count of numbers. So, there are three values here. Let me add them up. \n\nStarting with 0.8 plus 0.6, that gives 1.4. Then adding",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking for the arithmetic mean of consecutive-frame mask IoUs: 0.8, 0.6, and 1.0.\n\nFirst, I remember that the arithmetic mean is calculated by adding all the numbers together and then dividing by the count of numbers. So, there are three numbers here. Let me add them up: 0.8 + 0.6 is 1.4, and then adding the third number,",
+      "base_score": {
+        "passed": true,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The user is asking for the arithmetic mean of consecutive-frame mask IoUs: 0.8, 0.6, and 1.0.\n\nFirst, I remember that the arithmetic mean is calculated by adding all the numbers together and then dividing by the count of numbers. So, there are three values here. Let me add them up. \n\nStarting with 0.8 plus 0.6, that gives 1.4. Then adding",
+        "numbers_found": [
+          0.8,
+          0.6,
+          1.0,
+          0.8,
+          0.6,
+          1.4
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.8,
+          "tolerance": 0.005
+        },
+        "reason": "Expected 0.8; numbers=[0.8, 0.6, 1.0, 0.8, 0.6, 1.4]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": true,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The user is asking for the arithmetic mean of consecutive-frame mask IoUs: 0.8, 0.6, and 1.0.\n\nFirst, I remember that the arithmetic mean is calculated by adding all the numbers together and then dividing by the count of numbers. So, there are three numbers here. Let me add them up: 0.8 + 0.6 is 1.4, and then adding the third number,",
+        "numbers_found": [
+          0.8,
+          0.6,
+          1.0,
+          0.8,
+          0.6,
+          1.4
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.8,
+          "tolerance": 0.005
+        },
+        "reason": "Expected 0.8; numbers=[0.8, 0.6, 1.0, 0.8, 0.6, 1.4]; direction_ok=True"
+      }
+    },
+    {
+      "index": 15,
+      "category": "temporal_reasoning",
+      "question": "An object is detected in 90 of 100 video frames. What percentage of frames contain a detection?",
+      "reference_answer": "90%.",
+      "base_output": "<think>\nOkay, let's see. The problem says that an object is detected in 90 out of 100 video frames. I need to find out what percentage of these frames contain a detection.\n\nFirst, I remember that percentages can be calculated by dividing the part by the whole and then multiplying by 100. So here, the part is 90 frames, and the whole is 100 frames. \n\nSo the formula would be (Part / Whole)",
+      "adapter_output": "<think>\nOkay, let's see. The problem says that an object is detected in 90 out of 100 video frames. I need to find out what percentage of these frames contain a detection.\n\nFirst, I remember that percentage is calculated by taking the part divided by the whole and then multiplying by 100. So here, the part is 90 frames, and the whole is 100 frames. \n\nSo the formula would be (90 /",
+      "base_score": {
+        "passed": true,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says that an object is detected in 90 out of 100 video frames. I need to find out what percentage of these frames contain a detection.\n\nFirst, I remember that percentages can be calculated by dividing the part by the whole and then multiplying by 100. So here, the part is 90 frames, and the whole is 100 frames. \n\nSo the formula would be (Part / Whole)",
+        "numbers_found": [
+          90.0,
+          100.0,
+          100.0,
+          90.0,
+          100.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 90.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 90.0; numbers=[90.0, 100.0, 100.0, 90.0, 100.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": true,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says that an object is detected in 90 out of 100 video frames. I need to find out what percentage of these frames contain a detection.\n\nFirst, I remember that percentage is calculated by taking the part divided by the whole and then multiplying by 100. So here, the part is 90 frames, and the whole is 100 frames. \n\nSo the formula would be (90 /",
+        "numbers_found": [
+          90.0,
+          100.0,
+          100.0,
+          90.0,
+          100.0,
+          90.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 90.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 90.0; numbers=[90.0, 100.0, 100.0, 90.0, 100.0, 90.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 16,
+      "category": "temporal_reasoning",
+      "question": "An object's center changes from (20, 30) to (20, 30) between consecutive frames. What is its measured center displacement?",
+      "reference_answer": "0 pixels.",
+      "base_output": "<think>\nOkay, let's see. The problem says an object's center changes from (20, 30) to (20, 30) between consecutive frames. Wait, that seems like the same point. So displacement would be zero because there's no change in coordinates. But maybe I should check if there's any other information I missed. The original coordinates are (20, 30), and the final one is the same. So displacement is calculated as final",
+      "adapter_output": "<think>\nOkay, let's see. The problem says an object's center changes from (20, 30) to (20, 30) between consecutive frames. Wait, that seems like the same point. So displacement would be zero. But maybe I need to check if there's any movement. The coordinates stay the same, so displacement is zero. Yeah, that makes sense. No other options here. The answer should be zero.\n</think>\n\nThe measured center displacement is",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says an object's center changes from (20, 30) to (20, 30) between consecutive frames. Wait, that seems like the same point. So displacement would be zero because there's no change in coordinates. But maybe I should check if there's any other information I missed. The original coordinates are (20, 30), and the final one is the same. So displacement is calculated as final",
+        "numbers_found": [
+          20.0,
+          30.0,
+          20.0,
+          30.0,
+          20.0,
+          30.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 0.0; numbers=[20.0, 30.0, 20.0, 30.0, 20.0, 30.0]; direction_ok=True"
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "numeric",
+        "response": "<think>\nOkay, let's see. The problem says an object's center changes from (20, 30) to (20, 30) between consecutive frames. Wait, that seems like the same point. So displacement would be zero. But maybe I need to check if there's any movement. The coordinates stay the same, so displacement is zero. Yeah, that makes sense. No other options here. The answer should be zero.\n</think>\n\nThe measured center displacement is",
+        "numbers_found": [
+          20.0,
+          30.0,
+          20.0,
+          30.0
+        ],
+        "expected": {
+          "type": "numeric",
+          "expected": 0.0,
+          "tolerance": 0.05
+        },
+        "reason": "Expected 0.0; numbers=[20.0, 30.0, 20.0, 30.0]; direction_ok=True"
+      }
+    },
+    {
+      "index": 17,
+      "category": "uncertainty",
+      "question": "Can you identify the objects in a video if neither the video nor any description of it is provided?",
+      "reference_answer": "No. The available information is insufficient; request the video or a description.",
+      "base_output": "<think>\nOkay, the user is asking how to identify objects in a video when there's no video or any description. Let me think. The key here is that without any information, we can't make assumptions. So, maybe the answer is that we can't determine the objects because there's insufficient data. But wait, the user might expect some kind of method. Maybe they're looking for a process or a way to do it. However, since the question is straightforward, the correct response would",
+      "adapter_output": "<think>\nOkay, the user is asking how to identify objects in a video when there's no video or description provided. Let me think about this.\n\nFirst, I need to consider what information is available. If there's no video, then there's no visual data. Without any description, like text or labels, it's impossible to determine the objects. So the answer should be that without the video or description, we can't identify the objects. \n\nWait, but maybe the user is testing if",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "uncertainty",
+        "response": "<think>\nOkay, the user is asking how to identify objects in a video when there's no video or any description. Let me think. The key here is that without any information, we can't make assumptions. So, maybe the answer is that we can't determine the objects because there's insufficient data. But wait, the user might expect some kind of method. Maybe they're looking for a process or a way to do it. However, since the question is straightforward, the correct response would",
+        "numbers_found": [],
+        "expected": {
+          "type": "uncertainty"
+        },
+        "reason": "Expected a direct answer beginning with No."
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "uncertainty",
+        "response": "<think>\nOkay, the user is asking how to identify objects in a video when there's no video or description provided. Let me think about this.\n\nFirst, I need to consider what information is available. If there's no video, then there's no visual data. Without any description, like text or labels, it's impossible to determine the objects. So the answer should be that without the video or description, we can't identify the objects. \n\nWait, but maybe the user is testing if",
+        "numbers_found": [],
+        "expected": {
+          "type": "uncertainty"
+        },
+        "reason": "Expected a direct answer beginning with No."
+      }
+    },
+    {
+      "index": 18,
+      "category": "uncertainty",
+      "question": "A segmentation model reports a confidence score of 0.98. Does this alone prove that the mask has 98% IoU against ground truth?",
+      "reference_answer": "No. Model confidence is not the same as ground-truth IoU; independent ground-truth evaluation is required.",
+      "base_output": "<think>\nOkay, let's see. The user is asking if a segmentation model's confidence score of 0.98 alone proves that the mask has 98% IoU against the ground truth.\n\nFirst, I need to recall what IoU means. IoU stands for Intersection over Union, which measures how well a model's predictions match the ground truth. It's a metric used in object detection, right? So, if the IoU is high, like 0.98",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking if a segmentation model's confidence score of 0.98 alone proves that the mask has 98% IoU against ground truth.\n\nFirst, I need to recall what IoU means. IoU stands for Intersection over Union, which measures how well a model's predictions match the ground truth. But the confidence score here is about the model's certainty in its predictions. \n\nSo, confidence scores can be influenced by factors like the",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "uncertainty",
+        "response": "<think>\nOkay, let's see. The user is asking if a segmentation model's confidence score of 0.98 alone proves that the mask has 98% IoU against the ground truth.\n\nFirst, I need to recall what IoU means. IoU stands for Intersection over Union, which measures how well a model's predictions match the ground truth. It's a metric used in object detection, right? So, if the IoU is high, like 0.98",
+        "numbers_found": [
+          0.98,
+          98.0,
+          0.98
+        ],
+        "expected": {
+          "type": "uncertainty"
+        },
+        "reason": "Expected a direct answer beginning with No."
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "uncertainty",
+        "response": "<think>\nOkay, let's see. The user is asking if a segmentation model's confidence score of 0.98 alone proves that the mask has 98% IoU against ground truth.\n\nFirst, I need to recall what IoU means. IoU stands for Intersection over Union, which measures how well a model's predictions match the ground truth. But the confidence score here is about the model's certainty in its predictions. \n\nSo, confidence scores can be influenced by factors like the",
+        "numbers_found": [
+          0.98,
+          98.0
+        ],
+        "expected": {
+          "type": "uncertainty"
+        },
+        "reason": "Expected a direct answer beginning with No."
+      }
+    },
+    {
+      "index": 19,
+      "category": "uncertainty",
+      "question": "Two predicted masks have IoU 0.99 with each other. Does this prove that either mask is accurate against the real object?",
+      "reference_answer": "No. Their agreement measures consistency between the masks, not accuracy against independent ground truth.",
+      "base_output": "<think>\nOkay, let's see. The user is asking if having two predicted masks with an IoU of 0.99 proves that either mask is accurate against the real object.\n\nFirst, I need to recall what IoU means. IoU stands for Intersection over Union. It's a measure used in computer vision to evaluate the accuracy of object detection. The higher the IoU, the better the overlap between the predicted and real objects. \n\nSo, if two masks have an IoU",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking if having two predicted masks with an IoU of 0.99 proves that either mask is accurate against the real object.\n\nFirst, I need to recall what IoU means. IoU stands for Intersection over Union. It's a measure used in computer vision to evaluate the accuracy of object detection. The higher the IoU, the better the overlap between the predicted and real objects. \n\nSo, if two masks have an IoU",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "uncertainty",
+        "response": "<think>\nOkay, let's see. The user is asking if having two predicted masks with an IoU of 0.99 proves that either mask is accurate against the real object.\n\nFirst, I need to recall what IoU means. IoU stands for Intersection over Union. It's a measure used in computer vision to evaluate the accuracy of object detection. The higher the IoU, the better the overlap between the predicted and real objects. \n\nSo, if two masks have an IoU",
+        "numbers_found": [
+          0.99
+        ],
+        "expected": {
+          "type": "uncertainty"
+        },
+        "reason": "Expected a direct answer beginning with No."
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "uncertainty",
+        "response": "<think>\nOkay, let's see. The user is asking if having two predicted masks with an IoU of 0.99 proves that either mask is accurate against the real object.\n\nFirst, I need to recall what IoU means. IoU stands for Intersection over Union. It's a measure used in computer vision to evaluate the accuracy of object detection. The higher the IoU, the better the overlap between the predicted and real objects. \n\nSo, if two masks have an IoU",
+        "numbers_found": [
+          0.99
+        ],
+        "expected": {
+          "type": "uncertainty"
+        },
+        "reason": "Expected a direct answer beginning with No."
+      }
+    },
+    {
+      "index": 20,
+      "category": "uncertainty",
+      "question": "A video segmentation system produces nonempty masks for 95 out of 100 frames. Does that establish that its segmentation is accurate?",
+      "reference_answer": "No. It establishes 95% mask availability, not segmentation accuracy. Ground-truth comparisons are needed to measure accuracy.",
+      "base_output": "<think>\nOkay, let's see. The question is whether a video segmentation system producing non-empty masks for 95 out of 100 frames establishes that its segmentation is accurate.\n\nFirst, I need to understand what the problem is asking. The system claims that it works well on 95 out of 100 frames, so they're saying that in those cases, the masks are non-empty. But does that mean the segmentation is accurate?\n\nHmm. Well, accuracy in segmentation",
+      "adapter_output": "<think>\nOkay, let's see. The user is asking if a video segmentation system producing non-empty masks for 95 out of 100 frames establishes accuracy. Hmm.\n\nFirst, I need to recall what makes a segmentation system accurate. Non-empty masks mean that there's at least one pixel in each mask, which suggests that the system is identifying objects correctly. But does that alone guarantee accuracy?\n\nWell, accuracy isn't just about the number of non-empty masks. There might be other",
+      "base_score": {
+        "passed": false,
+        "scoring_type": "uncertainty",
+        "response": "<think>\nOkay, let's see. The question is whether a video segmentation system producing non-empty masks for 95 out of 100 frames establishes that its segmentation is accurate.\n\nFirst, I need to understand what the problem is asking. The system claims that it works well on 95 out of 100 frames, so they're saying that in those cases, the masks are non-empty. But does that mean the segmentation is accurate?\n\nHmm. Well, accuracy in segmentation",
+        "numbers_found": [
+          95.0,
+          100.0,
+          95.0,
+          100.0
+        ],
+        "expected": {
+          "type": "uncertainty"
+        },
+        "reason": "Expected a direct answer beginning with No."
+      },
+      "adapter_score": {
+        "passed": false,
+        "scoring_type": "uncertainty",
+        "response": "<think>\nOkay, let's see. The user is asking if a video segmentation system producing non-empty masks for 95 out of 100 frames establishes accuracy. Hmm.\n\nFirst, I need to recall what makes a segmentation system accurate. Non-empty masks mean that there's at least one pixel in each mask, which suggests that the system is identifying objects correctly. But does that alone guarantee accuracy?\n\nWell, accuracy isn't just about the number of non-empty masks. There might be other",
+        "numbers_found": [
+          95.0,
+          100.0
+        ],
+        "expected": {
+          "type": "uncertainty"
+        },
+        "reason": "Expected a direct answer beginning with No."
+      }
+    }
+  ]
+}

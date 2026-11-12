@@ -1,0 +1,28 @@
+{
+  "num_objects": 1,
+  "objects": [
+    {
+      "id": 1,
+      "semantic_label": "dog",
+      "confidence": null,
+      "bbox": [
+        544,
+        417,
+        943,
+        629
+      ],
+      "area": 38054,
+      "center": [
+        734.1329426604299,
+        499.40085142166396
+      ],
+      "mask_area_ratio": 0.04129123263888889,
+      "frame_index": 244,
+      "frame_width": 1280,
+      "frame_height": 720,
+      "depth_mean": null,
+      "depth_std": null,
+      "depth_status": "Not recovered from saved masks"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "experiment": "Truck segmentation evaluation",
+  "model": "SAM2.1 Hiera Small",
+  "annotation_method": "Manual polygon",
+  "image": "truck.jpg",
+  "ground_truth_pixels": 644003,
+  "predicted_pixels": 639940,
+  "intersection_pixels": 625606,
+  "IoU": 0.950282,
+  "Dice": 0.974507,
+  "evaluation_scope": "One image",
+  "ground_truth_source": "Manual annotation; approximate reference",
+  "limitations": [
+    "Single-image evaluation",
+    "Manual annotation may contain boundary errors",
+    "Not an official FastReasonSeg benchmark result"
+  ]
+}

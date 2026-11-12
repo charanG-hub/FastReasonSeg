@@ -1,5 +1,5 @@
 streamlit==1.66.1
-numpy
+numpy<2.3
 Pillow
 opencv-python-headless
 transformers==4.57.6
@@ -8,6 +8,7 @@ accelerate
 timm
 huggingface-hub
 streamlit-drawable-canvas==0.9.3
-SAM-2==1.0
 torch
 torchvision
+hydra-core
+iopath

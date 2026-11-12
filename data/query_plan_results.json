@@ -1,0 +1,60 @@
+[
+  {
+    "query": "What is the area of the truck?",
+    "selected_object_id": "object_1",
+    "plan": [
+      "calculate_object_area"
+    ],
+    "result": {
+      "area": {
+        "foreground_pixels": 639940,
+        "image_pixels": 2160000,
+        "area_percentage": 29.63
+      }
+    }
+  },
+  {
+    "query": "Where is the truck located?",
+    "selected_object_id": "object_1",
+    "plan": [
+      "classify_spatial_position"
+    ],
+    "result": {
+      "position": {
+        "horizontal_position": "center",
+        "vertical_position": "middle",
+        "center_xy": [
+          890.0,
+          600.0
+        ]
+      }
+    }
+  },
+  {
+    "query": "What is the truck's depth?",
+    "selected_object_id": "object_1",
+    "plan": [
+      "retrieve_depth_statistics"
+    ],
+    "result": {
+      "depth": {
+        "mean": 4.187078475952148,
+        "median": 4.270100116729736,
+        "min": 1.0337278842926025,
+        "max": 4.578012466430664,
+        "std": 0.26414135098457336
+      },
+      "depth_note": "Relative depth estimates; not physical distances in meters."
+    }
+  },
+  {
+    "query": "Identify the truck.",
+    "selected_object_id": "object_1",
+    "plan": [
+      "retrieve_object_identity"
+    ],
+    "result": {
+      "object": "truck"
+    }
+  }
+]
