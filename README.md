@@ -5,7 +5,7 @@
 > **Institution:** School of Computer Science and Engineering (SCOPE), Vellore Institute of Technology (VIT), India  
 > **Base Paper:** *Fast Reasoning Segmentation for Images and Videos* — IEEE/CVF CVPR 2026 (Shen & Unberath)  
 > **Research Paper:** 17-Page Comprehensive Technical Report (`docs/paper/FastReasonSeg_3D_Research_Paper.pdf`)  
-> **Presentation Deck:** 14-Slide Professional White-Themed Deck (`docs/FastReasonSeg_3D_Presentation.pdf` / `.pptx`)  
+> **Presentation Deck:** 16-Slide Professional White-Themed Deck (`docs/FastReasonSeg_3D_Presentation.pdf` / `.pptx`)  
 > **GitHub Repository:** [https://github.com/charanG-hub/FastReasonSeg](https://github.com/charanG-hub/FastReasonSeg)  
 > **Kaggle Public Dataset:** [https://www.kaggle.com/datasets/charankumargeddam/fastreasonseg-3d](https://www.kaggle.com/datasets/charankumargeddam/fastreasonseg-3d)  
 > **Kaggle Public Notebook:** [https://www.kaggle.com/code/charankumargeddam/fastreasonseg-3d-reasoning-segmentation](https://www.kaggle.com/code/charankumargeddam/fastreasonseg-3d-reasoning-segmentation)  
