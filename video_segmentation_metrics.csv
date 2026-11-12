@@ -1,3 +1,0 @@
-Version,Total_Frames,Non_Empty_Frames,Empty_Frames,Availability_Percent,Valid_Consecutive_Pairs,Mean_Consecutive_IoU,Median_Consecutive_IoU
-Original,289,266,23,92.04152249134948,264,0.7536531856893656,0.765099487837458
-Corrected,289,267,22,92.38754325259515,265,0.749982862027448,0.7638998385704096
