@@ -3,218 +3,896 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FastReasonSeg-3D Technical Presentation</title>
+  <title>FastReasonSeg-3D Technical Presentation | Clean White Theme</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden; }
-    .slide { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem 6rem; border-bottom: 1px solid #1e293b; }
-    .card { background-color: #1e293b; border: 1px solid #334155; border-radius: 1rem; padding: 2rem; }
-    .badge { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid #38bdf8; font-size: 0.85rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; }
+    body {
+      background-color: #f8fafc;
+      color: #334155;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      scroll-behavior: smooth;
+    }
+    .slide {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 5rem;
+      border-bottom: 1px solid #e2e8f0;
+      background: #ffffff;
+      position: relative;
+    }
+    .card {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.875rem;
+      padding: 1.5rem;
+      transition: all 0.2s ease-in-out;
+    }
+    .card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .badge-emerald {
+      background: #ecfdf5;
+      color: #059669;
+      border-color: #a7f3d0;
+    }
+    .badge-amber {
+      background: #fef3c7;
+      color: #d97706;
+      border-color: #fde68a;
+    }
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.375rem;
+      font-size: 0.85em;
+      border: 1px solid #e2e8f0;
+    }
+    .stat-number {
+      font-weight: 800;
+      line-height: 1;
+    }
+    nav.toc-nav {
+      position: fixed;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+      padding: 0.75rem 0.5rem;
+      border-radius: 9999px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    nav.toc-nav a {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 9999px;
+      background: #cbd5e1;
+      transition: all 0.2s;
+    }
+    nav.toc-nav a:hover, nav.toc-nav a.active {
+      background: #2563eb;
+      transform: scale(1.3);
+    }
   </style>
 </head>
-<body class="selection:bg-sky-500 selection:text-white">
+<body class="selection:bg-blue-100 selection:text-blue-900">
 
-  <!-- SLIDE 1: TITLE -->
+  <!-- Quick Nav Dots -->
+  <nav class="toc-nav hidden lg:flex" title="Slide Navigator">
+    <a href="#slide-1" title="1. Title Slide"></a>
+    <a href="#slide-2" title="2. Executive Summary"></a>
+    <a href="#slide-3" title="3. Paradigm & Background"></a>
+    <a href="#slide-4" title="4. Two Bottlenecks"></a>
+    <a href="#slide-5" title="5. System Architecture"></a>
+    <a href="#slide-6" title="6. Module 1: SDG"></a>
+    <a href="#slide-7" title="7. Module 2: ABR"></a>
+    <a href="#slide-8" title="8. Empirical Validation 1"></a>
+    <a href="#slide-9" title="9. Empirical Validation 2"></a>
+    <a href="#slide-10" title="10. 4-Way Ablation"></a>
+    <a href="#slide-11" title="11. Latency Profile"></a>
+    <a href="#slide-12" title="12. Neural SDG Convergence"></a>
+    <a href="#slide-13" title="13. Qualitative Studies"></a>
+    <a href="#slide-14" title="14. Conclusion & Links"></a>
+  </nav>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 1: TITLE SLIDE -->
+  <!-- ===================================================================== -->
   <section class="slide" id="slide-1">
-    <div class="max-w-5xl">
-      <div class="inline-block badge mb-6">Research & Technical Presentation • CVPR 2026 Extension</div>
-      <h1 class="text-6xl font-extrabold tracking-tight text-white mb-6">FastReasonSeg-3D</h1>
-      <h2 class="text-2xl font-medium text-slate-400 mb-8 max-w-4xl leading-relaxed">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-6">Research & Technical Presentation • CVPR 2026 Extension</div>
+      <h1 class="text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-4">
+        FastReasonSeg-3D
+      </h1>
+      <h2 class="text-xl lg:text-2xl font-bold text-blue-600 mb-4 max-w-4xl leading-relaxed">
         Geometry-Aware Reasoning Segmentation via 3D Spatial-Depth Gating & Uncertainty-Guided Boundary Refinement
       </h2>
-      <div class="flex items-center space-x-6 text-sm text-emerald-400 font-mono">
-        <span>Lead Architect: Geddam Charan Kumar (Reg. No: 24BCE8232)</span>
-        <span>•</span>
-        <span>Platform: NVIDIA RTX 4050 (CUDA 12.4)</span>
-        <span>•</span>
-        <span>Status: Validated (+56.0% Acc Gain)</span>
+      <p class="text-base text-slate-500 mb-10 max-w-3xl leading-relaxed">
+        Resolving Geometric Depth Collapse & Zero-Shot Boundary Bleed in Decoupled Vision-Language Foundation Models.
+      </p>
+
+      <!-- 3 Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="card bg-blue-50/60 border-blue-200">
+          <div class="text-xs font-bold uppercase text-blue-600 tracking-wider mb-2">Decoupled Perception</div>
+          <p class="text-sm text-slate-700 leading-relaxed">Asynchronous OWLv2 open-vocabulary detection, Depth Anything V2 depth fields, and SAM 2 zero-shot mask decoder.</p>
+        </div>
+        <div class="card bg-emerald-50/60 border-emerald-200">
+          <div class="text-xs font-bold uppercase text-emerald-600 tracking-wider mb-2">SpatialDepthGate (SDG)</div>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong class="text-emerald-700">+56.0% Referring Disambiguation</strong> via normalized 3D coordinates <code class="code-pill">(x_c, y_c, z_rel)</code> and directed occlusion graphs.</p>
+        </div>
+        <div class="card bg-indigo-50/60 border-indigo-200">
+          <div class="text-xs font-bold uppercase text-indigo-600 tracking-wider mb-2">AdaptiveBoundaryRefiner (ABR)</div>
+          <p class="text-sm text-slate-700 leading-relaxed"><strong class="text-indigo-700">+12.94% Boundary F@2px</strong> via Sobel depth discontinuity ridges and dynamic positive/negative corrective prompts.</p>
+        </div>
+      </div>
+
+      <!-- Author Card -->
+      <div class="card bg-white border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4 text-sm">
+        <div>
+          <div class="font-bold text-slate-900 text-base">Geddam Charan Kumar <span class="text-slate-400 font-normal">| Reg. No:</span> <span class="font-mono text-blue-600 font-semibold">24BCE8232</span></div>
+          <div class="text-slate-600">School of Computer Science and Engineering (SCOPE), Vellore Institute of Technology (VIT), India</div>
+          <div class="text-slate-500 font-mono text-xs mt-1">Email: <a href="mailto:geddamcharan24@gmail.com" class="text-blue-600 hover:underline">geddamcharan24@gmail.com</a></div>
+        </div>
+        <div class="text-xs text-slate-500 md:text-right border-t md:border-t-0 pt-2 md:pt-0 border-slate-100">
+          <div>Base Paper: CVPR 2026 (Shen & Unberath)</div>
+          <div class="font-mono text-emerald-600 font-semibold mt-0.5">NVIDIA GeForce RTX 4050 GPU (CUDA 12.4) • Debian GNU/Linux</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 2: EXECUTIVE SUMMARY -->
+  <!-- ===================================================================== -->
+  <!-- SLIDE 2: EXECUTIVE SUMMARY & CORE ACHIEVEMENTS -->
+  <!-- ===================================================================== -->
   <section class="slide" id="slide-2">
-    <div class="max-w-6xl w-full">
-      <div class="badge mb-4">Core Achievements</div>
-      <h2 class="text-4xl font-bold text-white mb-10">Empirical Accuracy Gains at a Glance</h2>
-      <div class="grid grid-cols-2 gap-8">
-        <div class="card border-emerald-500/40 hover:border-emerald-500 transition">
-          <div class="text-5xl font-black text-emerald-400 mb-2">+56.0%</div>
-          <div class="text-xl font-bold text-white mb-2">Referring Accuracy Jump</div>
-          <p class="text-slate-400 text-sm leading-relaxed">Surged from 28.0% (baseline) to 84.0% across 25 multi-object relational queries, achieving a 77.8% relative error reduction.</p>
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Executive Summary</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">Core Breakthroughs & Quantified Impact</h2>
+      <p class="text-slate-500 text-sm mb-8">Resolving 3D spatial collapse and zero-shot boundary bleed with negligible runtime overhead.</p>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="card bg-emerald-50/50 border-emerald-200">
+          <div class="text-4xl lg:text-5xl stat-number text-emerald-600 mb-2">+56.0%</div>
+          <div class="font-bold text-slate-900 text-sm mb-1">Referring Accuracy Gain</div>
+          <p class="text-xs text-slate-600">Surged from 28.0% to 84.0% across 25 relational spatial queries.</p>
         </div>
-        <div class="card border-sky-500/40 hover:border-sky-500 transition">
-          <div class="text-5xl font-black text-sky-400 mb-2">+12.94%</div>
-          <div class="text-xl font-bold text-white mb-2">Boundary F@2px Contour Gain</div>
-          <p class="text-slate-400 text-sm leading-relaxed">Boundary contour precision elevated from 21.30% to 34.24%, eliminating over-segmentation edge bleed along depth discontinuities.</p>
+        <div class="card bg-blue-50/50 border-blue-200">
+          <div class="text-4xl lg:text-5xl stat-number text-blue-600 mb-2">+12.94%</div>
+          <div class="font-bold text-slate-900 text-sm mb-1">Boundary F@2px Contour</div>
+          <p class="text-xs text-slate-600">Precision elevated from 21.30% to 34.24%, eliminating edge bleed.</p>
         </div>
-        <div class="card border-sky-500/40 hover:border-sky-500 transition">
-          <div class="text-5xl font-black text-sky-400 mb-2">+1.61%</div>
-          <div class="text-xl font-bold text-white mb-2">Mask IoU (J) Increase</div>
-          <p class="text-slate-400 text-sm leading-relaxed">Truck ground truth IoU rose from 94.61% to 96.22%, with Dice coefficient advancing to 98.07%.</p>
+        <div class="card bg-indigo-50/50 border-indigo-200">
+          <div class="text-4xl lg:text-5xl stat-number text-indigo-600 mb-2">77.8%</div>
+          <div class="font-bold text-slate-900 text-sm mb-1">Relative Error Reduction</div>
+          <p class="text-xs text-slate-600">100% accuracy on occlusion queries (up from 0.0% failure in baseline).</p>
         </div>
-        <div class="card border-emerald-500/40 hover:border-emerald-500 transition">
-          <div class="text-5xl font-black text-emerald-400 mb-2">~48 ms</div>
-          <div class="text-xl font-bold text-white mb-2">Ultra-Low Overhead</div>
-          <p class="text-slate-400 text-sm leading-relaxed">Only +48ms latency addition per frame (1,436ms &rarr; 1,484ms), preserving real-time execution on consumer hardware.</p>
+        <div class="card bg-amber-50/50 border-amber-200">
+          <div class="text-4xl lg:text-5xl stat-number text-amber-600 mb-2">~48 ms</div>
+          <div class="font-bold text-slate-900 text-sm mb-1">Ultra-Low Overhead</div>
+          <p class="text-xs text-slate-600">Total runtime: 1,484 ms on laptop GPU (only +3.3% added latency).</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="font-bold text-blue-600 text-base mb-2">Orthogonal Modularity</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">SpatialDepthGate (SDG) and AdaptiveBoundaryRefiner (ABR) decouple semantic candidate selection from pixel contour snapping. SDG drives referring disambiguation while ABR ensures sub-pixel boundary adherence without mutual degradation.</p>
+        </div>
+        <div class="card">
+          <h3 class="font-bold text-emerald-600 text-base mb-2">Zero MLLM Retraining</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Unlike monolithic architectures (LISA, GLaMM) requiring expensive multi-billion parameter fine-tuning on massive GPU clusters, our geometry-aware gating runs zero-shot with off-the-shelf foundation models on a 6GB laptop GPU.</p>
+        </div>
+        <div class="card">
+          <h3 class="font-bold text-indigo-600 text-base mb-2">Production Edge Viability</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Full framework validated on Debian GNU/Linux with NVIDIA RTX 4050 GPU (CUDA 12.4). Peak VRAM stays comfortably at 5.2 GB, enabling real-time deployment on mobile robots and AR headsets at ~1.48s per frame.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 3: PROBLEM STATEMENT -->
+  <!-- ===================================================================== -->
+  <!-- SLIDE 3: BACKGROUND & REASONING SEGMENTATION PARADIGM -->
+  <!-- ===================================================================== -->
   <section class="slide" id="slide-3">
-    <div class="max-w-6xl w-full">
-      <div class="badge mb-4">Problem Statement</div>
-      <h2 class="text-4xl font-bold text-white mb-8">Why FastReasonSeg Needed 3D Geometry</h2>
-      <div class="grid grid-cols-2 gap-8">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Research Context</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">The Reasoning Segmentation Frontier</h2>
+      <p class="text-slate-500 text-sm mb-8">Evolution from monolithic vision-language models to decoupled perception and symbolic digital twins.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="card">
-          <h3 class="text-xl font-bold text-sky-400 mb-4">1. Geometric Depth Collapse</h3>
-          <ul class="space-y-4 text-slate-300 text-sm leading-relaxed">
-            <li><strong class="text-white">Scalar Flattening:</strong> FastReasonSeg serialized depth maps into scalar summary statistics (mean, median, std), destroying spatial coordinate topology.</li>
-            <li><strong class="text-white">Loss of 3D Grounding:</strong> In multi-instance scenes with multiple cars or people, the LLM had zero pairwise depth ranking or occlusion signals.</li>
-            <li><strong class="text-white">Failure on Referring Queries:</strong> Queries like <em>"vehicle behind the sedan"</em> degraded into random guesses (baseline accuracy was only 28.0%).</li>
+          <h3 class="font-bold text-blue-600 text-base mb-3">1. The Reasoning Segmentation Task</h3>
+          <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
+            <li><strong class="text-slate-900">Linguistic Grounding:</strong> Traditional segmentation relies on closed taxonomy categories or manual prompts. Reasoning segmentation demands identifying objects via implicit natural language instructions.</li>
+            <li><strong class="text-slate-900">Complex Queries:</strong> Queries like <em>"the vehicle occluded behind the white truck"</em> require joint spatial, directional, and geometric comprehension.</li>
+            <li><strong class="text-slate-900">Monolithic MLLMs:</strong> LISA, GLaMM, and PixelLM embedded mask tokens (<code class="code-pill">&lt;SEG&gt;</code>) inside 7B-13B LLMs, causing severe memory overhead (24-80GB VRAM) and 3-6s latency per frame.</li>
           </ul>
         </div>
         <div class="card">
-          <h3 class="text-xl font-bold text-sky-400 mb-4">2. Zero-Shot Mask Bleeding</h3>
-          <ul class="space-y-4 text-slate-300 text-sm leading-relaxed">
-            <li><strong class="text-white">Prompt Degradation:</strong> Bounding-box prompted SAM 2 frequently spills over edges or clips thin structures under low contrast.</li>
-            <li><strong class="text-white">Suboptimal Contour F-score:</strong> Baseline boundary contour accuracy at 2px tolerance was restricted to 21.30%.</li>
-            <li><strong class="text-white">Unused Depth Edges:</strong> Monocular relative depth maps contain distinct physical object boundaries that were previously discarded.</li>
+          <h3 class="font-bold text-emerald-600 text-base mb-3">2. The Decoupled Paradigm (CVPR 2026)</h3>
+          <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
+            <li><strong class="text-slate-900">Asynchronous Perception:</strong> FastReasonSeg (Shen & Unberath, CVPR 2026) introduced an asynchronous perception pipeline:
+              <div class="mt-1 pl-2 border-l-2 border-emerald-200">
+                1. OWLv2 open-vocabulary detection<br>
+                2. Depth Anything V2 relative depth<br>
+                3. SAM 2 zero-shot mask decoder
+              </div>
+            </li>
+            <li><strong class="text-slate-900">Digital Twin JSON:</strong> Detected entities are serialized into a lightweight JSON representation.</li>
+            <li><strong class="text-slate-900">Symbolic Reasoning:</strong> A compact LLM (Qwen-2.5) evaluates JSON text to select target ID in ~1.43s (~3.5x speedup).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="font-bold text-indigo-600 text-base mb-3">3. The Unaddressed Spatial Blindspot</h3>
+          <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
+            <li><strong class="text-slate-900">Scalar Flattening:</strong> Standard FastReasonSeg collapses dense 2.5D depth maps into simple scalar statistics (<code class="code-pill">mean_depth, std_depth</code>).</li>
+            <li><strong class="text-slate-900">Topological Loss:</strong> When multiple objects of identical classes appear at varying depths, the LLM has zero pairwise 3D grounding or occlusion cues.</li>
+            <li><strong class="text-slate-900">Zero-Shot Mask Bleeding:</strong> Box-prompted SAM 2 frequently leaks across depth discontinuities under low visual contrast.</li>
+            <li><strong class="text-slate-900">Our Solution:</strong> FastReasonSeg-3D restores 3D geometry and active contour snapping without sacrificing edge speed.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 4: NOVEL MODULES -->
+  <!-- ===================================================================== -->
+  <!-- SLIDE 4: TWO CRITICAL BOTTLENECKS -->
+  <!-- ===================================================================== -->
   <section class="slide" id="slide-4">
-    <div class="max-w-6xl w-full">
-      <div class="badge mb-4">Methodology</div>
-      <h2 class="text-4xl font-bold text-white mb-8">The Two Novel Modules Introduced</h2>
-      <div class="grid grid-cols-2 gap-8">
-        <div class="card border-sky-500/50">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge badge-amber mb-3">Failure Analysis</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">Two Fundamental Architectural Bottlenecks</h2>
+      <p class="text-slate-500 text-sm mb-8">In-depth diagnostic analysis of Geometric Depth Collapse and Zero-Shot Boundary Bleed.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="card bg-red-50/40 border-red-200">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Module 1: SpatialDepthGate</h3>
-            <span class="text-xs bg-sky-500/20 text-sky-300 px-3 py-1 rounded-full font-mono">SDG</span>
+            <h3 class="text-lg font-bold text-red-700">Bottleneck 1: Geometric Depth Collapse</h3>
+            <span class="badge bg-red-100 text-red-700 border-red-300">Semantic Failure</span>
           </div>
-          <ul class="space-y-3 text-slate-300 text-sm leading-relaxed">
-            <li><strong class="text-sky-300">Normalized 3D Projection:</strong> Computes $(x_c, y_c, z_{rel})$ where $z_{rel} \in [0, 1]$ represents ordered scene depth rank.</li>
-            <li><strong class="text-sky-300">Pairwise Relational Tensor:</strong> Formulates pairwise 3D offsets $(\Delta x, \Delta y, \Delta z)$ and Euclidean distance matrices.</li>
-            <li><strong class="text-sky-300">Occlusion Graph:</strong> Flags directed occlusion edges when 2D boxes overlap and $\Delta z < -\epsilon_z$.</li>
-            <li><strong class="text-sky-300">Result:</strong> Resolves referring expressions, boosting referring accuracy by <strong>+56.0%</strong>.</li>
+          <ul class="space-y-3 text-xs text-slate-700 leading-relaxed">
+            <li><strong class="text-red-900">• Digital Twin Scalar Flattening:</strong> Continuous relative depth fields are collapsed into crude scalar means and standard deviations (<code class="code-pill">μ_d, σ_d</code>), discarding coordinate topology.</li>
+            <li><strong class="text-red-900">• Destruction of Pairwise Spatial Ordering:</strong> In multi-object scenes with multiple cars or people, the LLM has zero pairwise 3D depth rank or occlusion relationships.</li>
+            <li><strong class="text-red-900">• Catastrophic Referring Failure:</strong> Queries requiring 3D spatial grounding (e.g. <em>"car behind truck"</em>) degrade into random guessing.</li>
+            <li><strong class="text-red-900">• Empirical Baseline Score:</strong> Baseline achieves only <strong>28.0% referring accuracy</strong> and exactly <strong>0.0% accuracy on occlusion queries</strong>.</li>
+            <li><strong class="text-red-900">• Scientific Takeaway:</strong> Textual LLMs cannot infer 3D physical world relationships from scalar statistics; explicit geometric inductive biases are strictly required.</li>
           </ul>
         </div>
-        <div class="card border-emerald-500/50">
+
+        <div class="card bg-amber-50/40 border-amber-200">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-white">Module 2: AdaptiveBoundaryRefiner</h3>
-            <span class="text-xs bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-mono">ABR</span>
+            <h3 class="text-lg font-bold text-amber-800">Bottleneck 2: Zero-Shot Boundary Bleed</h3>
+            <span class="badge bg-amber-100 text-amber-800 border-amber-300">Pixel Contour Failure</span>
           </div>
-          <ul class="space-y-3 text-slate-300 text-sm leading-relaxed">
-            <li><strong class="text-emerald-300">Depth-Gradient Ridges:</strong> Computes Sobel edge magnitude $\nabla \mathcal{D}$ across monocular depth maps.</li>
-            <li><strong class="text-emerald-300">Annular Boundary Band:</strong> Focuses refinement exclusively within an adaptive margin along mask perimeter.</li>
-            <li><strong class="text-emerald-300">Bleed Suppression:</strong> Excises mask pixels deviating $>2.5\sigma$ from interior object core depth.</li>
-            <li><strong class="text-emerald-300">Result:</strong> Elevates Boundary Contour Accuracy ($F@2\text{px}$) by <strong>+12.94%</strong>.</li>
+          <ul class="space-y-3 text-xs text-slate-700 leading-relaxed">
+            <li><strong class="text-amber-950">• Box Prompt Over-Segmentation:</strong> Standard SAM 2 conditioned on loose bounding boxes frequently leaks mask boundaries onto adjacent background pixels under low contrast.</li>
+            <li><strong class="text-amber-950">• Suboptimal Contour Precision:</strong> Baseline truck mask boundary contour accuracy at strict 2-pixel tolerance (<code class="code-pill">Boundary F@2px</code>) is restricted to <strong>21.30%</strong>.</li>
+            <li><strong class="text-amber-950">• Neglected Depth Discontinuities:</strong> Monocular relative depth maps contain sharp physical 3D geometric boundaries (<code class="code-pill">∇D</code>), but standard SAM 2 completely ignores them.</li>
+            <li><strong class="text-amber-950">• Downstream Robotics Impairment:</strong> Spurious boundary bleeding into ground pavement impairs robotic grasp planning, collision margins, and fine-grained measurement.</li>
+            <li><strong class="text-amber-950">• Scientific Takeaway:</strong> Pixel-accurate segmentation demands uncertainty-guided boundary analysis and dynamic corrective prompt injection directly at depth ridges.</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 5: BENCHMARK TABLE -->
+  <!-- ===================================================================== -->
+  <!-- SLIDE 5: SYSTEM ARCHITECTURE & BLUEPRINT -->
+  <!-- ===================================================================== -->
   <section class="slide" id="slide-5">
-    <div class="max-w-6xl w-full">
-      <div class="badge mb-4">Validation & Benchmarks</div>
-      <h2 class="text-4xl font-bold text-white mb-8">4-Way Full System Ablation Matrix</h2>
-      <div class="card overflow-x-auto p-0">
-        <table class="w-full text-left text-sm">
-          <thead class="bg-slate-800 text-sky-300 uppercase font-mono text-xs border-b border-slate-700">
-            <tr>
-              <th class="p-4">Configuration</th>
-              <th class="p-4 text-center">SDG</th>
-              <th class="p-4 text-center">ABR</th>
-              <th class="p-4 text-center">Referring Acc.</th>
-              <th class="p-4 text-center">Mask IoU (J)</th>
-              <th class="p-4 text-center">Boundary F@2px</th>
-              <th class="p-4 text-center">Latency</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-800 font-mono text-slate-300">
-            <tr class="hover:bg-slate-800/50">
-              <td class="p-4 font-sans font-medium text-white">(1) Baseline FastReasonSeg</td>
-              <td class="p-4 text-center text-slate-500">✗</td>
-              <td class="p-4 text-center text-slate-500">✗</td>
-              <td class="p-4 text-center">28.0%</td>
-              <td class="p-4 text-center">94.61%</td>
-              <td class="p-4 text-center">21.30%</td>
-              <td class="p-4 text-center">1,436 ms</td>
-            </tr>
-            <tr class="hover:bg-slate-800/50">
-              <td class="p-4 font-sans font-medium text-white">(2) FastReasonSeg + SpatialDepthGate</td>
-              <td class="p-4 text-center text-emerald-400">✓</td>
-              <td class="p-4 text-center text-slate-500">✗</td>
-              <td class="p-4 text-center font-bold text-emerald-400">84.0%</td>
-              <td class="p-4 text-center">94.61%</td>
-              <td class="p-4 text-center">21.30%</td>
-              <td class="p-4 text-center">1,442 ms</td>
-            </tr>
-            <tr class="hover:bg-slate-800/50">
-              <td class="p-4 font-sans font-medium text-white">(3) FastReasonSeg + AdaptiveBoundaryRefiner</td>
-              <td class="p-4 text-center text-slate-500">✗</td>
-              <td class="p-4 text-center text-emerald-400">✓</td>
-              <td class="p-4 text-center">28.0%</td>
-              <td class="p-4 text-center font-bold text-emerald-400">96.22%</td>
-              <td class="p-4 text-center font-bold text-emerald-400">34.24%</td>
-              <td class="p-4 text-center">1,478 ms</td>
-            </tr>
-            <tr class="bg-sky-950/40 hover:bg-sky-950/60 font-semibold text-white">
-              <td class="p-4 font-sans text-sky-300">(4) FastReasonSeg-3D (Full Proposed)</td>
-              <td class="p-4 text-center text-emerald-400">✓</td>
-              <td class="p-4 text-center text-emerald-400">✓</td>
-              <td class="p-4 text-center text-emerald-400 font-bold">84.0%</td>
-              <td class="p-4 text-center text-emerald-400 font-bold">96.22%</td>
-              <td class="p-4 text-center text-emerald-400 font-bold">34.24%</td>
-              <td class="p-4 text-center text-slate-300">1,484 ms</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Methodology</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">FastReasonSeg-3D Unified Blueprint</h2>
+      <p class="text-slate-500 text-sm mb-6">Dual-module extension seamlessly bridging perception, 3D spatial gating, and active mask refinement.</p>
+
+      <!-- Architecture Figure -->
+      <div class="card bg-white border-slate-200 p-4 mb-6 shadow-sm">
+        <div class="text-center text-xs font-bold text-blue-600 tracking-wider mb-2">FIGURE 1: UNIFIED END-TO-END DATAFLOW BLUEPRINT</div>
+        <img src="figures/system_architecture.png" alt="FastReasonSeg-3D System Architecture" class="w-full h-auto rounded border border-slate-100 max-h-56 object-contain mx-auto">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card">
+          <div class="text-xs font-bold text-blue-600 uppercase mb-2">Stage 1: Perception Foundation</div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">Input RGB frame processed asynchronously by OWLv2 (open-vocabulary 2D boxes) and Depth Anything V2 (dense relative depth field <code class="code-pill">D</code>). Initial candidate masks <code class="code-pill">M_0</code> predicted by SAM 2.</p>
+          <span class="text-[11px] font-mono text-emerald-600 font-semibold">Zero retraining needed</span>
+        </div>
+        <div class="card">
+          <div class="text-xs font-bold text-emerald-600 uppercase mb-2">Stage 2: SpatialDepthGate (SDG)</div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">Formulates normalized 3D centroid vectors <code class="code-pill">(x_c, y_c, z_rel)</code> and pairwise relational tensor <code class="code-pill">R</code>. Evaluates directed occlusion graphs <code class="code-pill">O</code> and cross-attention gating.</p>
+          <span class="text-[11px] font-mono text-emerald-600 font-semibold">+56.0% Acc in ~6 ms</span>
+        </div>
+        <div class="card">
+          <div class="text-xs font-bold text-indigo-600 uppercase mb-2">Stage 3: AdaptiveBoundaryRefiner (ABR)</div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">Evaluates Sobel depth ridges <code class="code-pill">∇D</code> along annular uncertainty band <code class="code-pill">B</code>. Suppresses depth inconsistencies and generates corrective prompt points <code class="code-pill">(P^+, P^-)</code>.</p>
+          <span class="text-[11px] font-mono text-indigo-600 font-semibold">+12.94% F@2px in ~42 ms</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SLIDE 6: CONCLUSION -->
+  <!-- ===================================================================== -->
+  <!-- SLIDE 6: MODULE 1: SPATIALDEPTHGATE (SDG) -->
+  <!-- ===================================================================== -->
   <section class="slide" id="slide-6">
-    <div class="max-w-5xl w-full">
-      <div class="badge mb-4">Conclusion & Deliverables</div>
-      <h2 class="text-4xl font-bold text-white mb-8">Summary of Completed Deliverables</h2>
-      <div class="space-y-4">
-        <div class="card flex items-start space-x-4">
-          <div class="text-emerald-400 text-xl font-bold">✓</div>
-          <div>
-            <h4 class="font-bold text-white text-lg">Full Academic Research Paper</h4>
-            <p class="text-slate-400 text-sm">Authored in <code class="text-sky-300">docs/RESEARCH_PAPER.md</code> with full mathematical formulations, equations, architectural diagrams, and citations.</p>
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Module 1 (SDG)</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">SpatialDepthGate Mathematical Formulations</h2>
+      <p class="text-slate-500 text-sm mb-8">Injecting explicit 3D coordinate tensors, relational vectors, and directed occlusion graphs.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="font-bold text-blue-600 text-sm mb-3">1. 3D Coordinates & Feature Vector</h3>
+          <div class="bg-slate-100 p-2.5 rounded font-mono text-xs text-slate-800 mb-3 space-y-1">
+            <div>x_{c,i} = (x_{1,i} + x_{2,i}) / (2W)</div>
+            <div>y_{c,i} = (y_{1,i} + y_{2,i}) / (2H)</div>
+            <div>d_i = median_{(u,v) \in M_{0,i}} D(u, v)</div>
+            <div>z_{rel,i} = (d_i - min_k d_k) / (max_k d_k - min_k d_k + \epsilon)</div>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Normalized depth rank <code class="code-pill">z_{rel,i} \in [0, 1]</code> orders objects (0 = foreground, 1 = background). Each candidate is encoded into an 8D feature:
+            <br><code class="code-pill text-[11px]">f_i = [x_{c,i}, y_{c,i}, z_{rel,i}, w_i, h_i, a_i, \sigma_{d,i}, s_i]^T</code>
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="font-bold text-emerald-600 text-sm mb-3">2. Relational Tensor & Occlusion Graph</h3>
+          <div class="bg-slate-100 p-2.5 rounded font-mono text-xs text-slate-800 mb-3 space-y-1">
+            <div>\Delta x_{ij} = x_{c,i} - x_{c,j}</div>
+            <div>\Delta z_{ij} = z_{rel,i} - z_{rel,j}</div>
+            <div>d_{3D,ij} = \sqrt{\Delta x^2 + \Delta y^2 + \lambda_z \Delta z^2}</div>
+            <div>O_{i \to j} = \mathbb{I}(IoU_{2D} > \tau_{occ} \wedge \Delta z_{ij} < -\epsilon_z)</div>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Directed edge <code class="code-pill">O_{i \to j} = 1</code> indicates entity <code class="code-pill">i</code> physically occludes entity <code class="code-pill">j</code> along camera perspective, resolving depth queries with zero ambiguity.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="font-bold text-indigo-600 text-sm mb-3">3. Candidate Scoring & Neural Gating</h3>
+          <div class="bg-slate-100 p-2.5 rounded font-mono text-xs text-slate-800 mb-3 space-y-1">
+            <div>S_i = s_i + \alpha \Phi_{depth} + \beta \Phi_{spatial} + \gamma \sum \Psi</div>
+            <div>c_i = \sum Softmax((h_i^T W_k r_{ij}) / \sqrt{D}) W_v r_{ij}</div>
+            <div>\hat{y}_i = w_o^T [ h_i \parallel c_i \parallel e_q ]</div>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Combines heuristic spatial compatibility and learned neural cross-attention over pairwise relations <code class="code-pill">R_{ij}</code>. Boosts accuracy to 84.0% with only <strong>~6 ms</strong> latency overhead.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 7: MODULE 2: ADAPTIVEBOUNDARYREFINER (ABR) -->
+  <!-- ===================================================================== -->
+  <section class="slide" id="slide-7">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Module 2 (ABR)</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">AdaptiveBoundaryRefiner Formulation</h2>
+      <p class="text-slate-500 text-sm mb-8">Active boundary uncertainty estimation and corrective prompt synthesis via depth ridges.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card">
+          <h3 class="font-bold text-blue-600 text-sm mb-2">Step 1: Depth-Gradient Ridge Computation (∇D)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">Convolves monocular relative depth map with horizontal and vertical Sobel kernels: <code class="code-pill">G_x = D * K_x, G_y = D * K_y</code>. Computes normalized gradient magnitude:</p>
+          <div class="bg-slate-100 p-2 rounded font-mono text-xs text-slate-800 mb-2">\nabla D = \sqrt{G_x^2 + G_y^2} / (\max(\sqrt{G_x^2 + G_y^2}) + \epsilon_g)</div>
+          <p class="text-xs text-slate-500">Physical depth discontinuities reveal true 3D geometric boundaries immune to color shadows.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="font-bold text-emerald-600 text-sm mb-2">Step 2: Annular Uncertainty Perimeter Band (B)</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">Restricts edge refinement strictly to candidate mask boundary margins using morphological operations:</p>
+          <div class="bg-slate-100 p-2 rounded font-mono text-xs text-slate-800 mb-2">\mathcal{B} = (M_0 \oplus \mathcal{K}_b) \setminus (M_0 \ominus \mathcal{K}_b)</div>
+          <p class="text-xs text-slate-500">Structuring element <code class="code-pill">\mathcal{K}_b</code> (width <code class="code-pill">b = 7</code>) preserves solid interior core while isolating ambiguous perimeter transitions.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="font-bold text-indigo-600 text-sm mb-2">Step 3: Depth-Consistency Bleed Suppression</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">Computes interior object core depth statistics: <code class="code-pill">\mu_{core}, \sigma_{core} = \text{stats}(D|_{M_{core}})</code>. Dynamically detects spurious mask bleeding:</p>
+          <div class="bg-slate-100 p-2 rounded font-mono text-xs text-slate-800 mb-2">Bleed(p) = \mathbb{I}(|D(p) - \mu_{core}| > \max(2.5 \sigma_{core}, \kappa \cdot \text{range}(D)))</div>
+          <p class="text-xs text-slate-500">Spurious mask pixels leaking into background pavement are excised prior to prompt synthesis.</p>
+        </div>
+
+        <div class="card">
+          <h3 class="font-bold text-amber-600 text-sm mb-2">Step 4: Strategic Corrective Prompt Synthesis</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">Synthesizes active prompt points for iterative SAM 2 re-prompting:</p>
+          <ul class="text-xs text-slate-600 space-y-1 mb-2">
+            <li>• <strong class="text-slate-900">Positive Anchors (<code class="code-pill">P^+</code>):</strong> Placed at topological center of mass of <code class="code-pill">M_{core}</code>.</li>
+            <li>• <strong class="text-slate-900">Negative Bleed Points (<code class="code-pill">P^-</code>):</strong> Placed at centroids of detected bleeding components in <code class="code-pill">\mathcal{B}</code>.</li>
+          </ul>
+          <p class="text-xs text-emerald-600 font-semibold">Elevates Boundary F@2px from 21.30% to 34.24% in ~42 ms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 8: EMPIRICAL VALIDATION 1: REFERRING DISAMBIGUATION -->
+  <!-- ===================================================================== -->
+  <section class="slide" id="slide-8">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Validation</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">Empirical Validation 1: Referring Disambiguation</h2>
+      <p class="text-slate-500 text-sm mb-6">Massive +56.0% accuracy gain, turning baseline failure modes into robust successes.</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <!-- Figure -->
+        <div class="card bg-white p-4">
+          <div class="text-center text-xs font-bold text-blue-600 tracking-wider mb-2">FIGURE 2: REFERRING ACCURACY BREAKDOWN</div>
+          <img src="figures/category_accuracy_breakdown.png" alt="Category Accuracy Breakdown" class="w-full h-auto rounded border border-slate-100 max-h-72 object-contain mx-auto">
+        </div>
+
+        <!-- Table & Insights -->
+        <div>
+          <div class="card overflow-hidden p-0 mb-4">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-blue-50 text-blue-900 font-bold border-b border-blue-200">
+                <tr>
+                  <th class="p-3">Query Category</th>
+                  <th class="p-3 text-center">Baseline</th>
+                  <th class="p-3 text-center">Ours (SDG)</th>
+                  <th class="p-3 text-center">Gain (Δ)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-mono text-slate-700">
+                <tr>
+                  <td class="p-2.5 font-sans">Pure Spatial (Left/Right)</td>
+                  <td class="p-2.5 text-center">71.4%</td>
+                  <td class="p-2.5 text-center text-slate-900 font-semibold">85.7%</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">+14.3%</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans">Cardinal / Depth</td>
+                  <td class="p-2.5 text-center">20.0%</td>
+                  <td class="p-2.5 text-center text-slate-900 font-semibold">80.0%</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">+60.0%</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans">Depth + Spatial</td>
+                  <td class="p-2.5 text-center">20.0%</td>
+                  <td class="p-2.5 text-center text-slate-900 font-semibold">100.0%</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">+80.0%</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans">Occlusion Queries</td>
+                  <td class="p-2.5 text-center text-red-500 font-semibold">0.0%</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">100.0%</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">+100.0%</td>
+                </tr>
+                <tr class="bg-emerald-50/70 font-semibold text-slate-900">
+                  <td class="p-3 font-sans">Overall Benchmark Average</td>
+                  <td class="p-3 text-center">28.0%</td>
+                  <td class="p-3 text-center text-emerald-700 font-bold text-sm">84.0%</td>
+                  <td class="p-3 text-center text-emerald-700 font-bold text-sm">+56.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card bg-slate-50 border-slate-200">
+            <div class="text-xs font-bold text-slate-900 mb-2">Key Scientific Insights:</div>
+            <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+              <li><strong class="text-slate-900">• 100% Occlusion Resolution:</strong> Baseline failed completely (0.0%) because Digital Twins omitted overlap cues. SDG directed occlusion graphs <code class="code-pill">O_{i \to j}</code> resolve all occlusion ambiguities.</li>
+              <li><strong class="text-slate-900">• 5.0x Gain on Depth + Spatial:</strong> Multi-constraint queries surged from 20.0% to 100.0% with combined 3D coordinate gating.</li>
+              <li><strong class="text-slate-900">• 77.8% Relative Error Cut:</strong> Overall classification error dropped from 72.0% to 16.0% across 25 multi-object queries.</li>
+            </ul>
           </div>
         </div>
-        <div class="card flex items-start space-x-4">
-          <div class="text-emerald-400 text-xl font-bold">✓</div>
-          <div>
-            <h4 class="font-bold text-white text-lg">PowerPoint Presentation (.pptx) & HTML Deck</h4>
-            <p class="text-slate-400 text-sm">Native widescreen presentation saved at <code class="text-sky-300">docs/FastReasonSeg_3D_Presentation.pptx</code> and interactive web deck at <code class="text-sky-300">docs/presentation.html</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 9: EMPIRICAL VALIDATION 2: BOUNDARY REFINEMENT -->
+  <!-- ===================================================================== -->
+  <section class="slide" id="slide-9">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Mask Fidelity</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">Boundary Refinement & High-Res Mask Snapping</h2>
+      <p class="text-slate-500 text-sm mb-6">Depth-gradient guided snapping eliminates zero-shot mask bleeding on high-resolution contours.</p>
+
+      <!-- Mask comparison figure -->
+      <div class="card bg-white p-4 mb-6">
+        <div class="text-center text-xs font-bold text-blue-600 tracking-wider mb-2">FIGURE 3: VISUAL COMPARISON OF MASK BOUNDARY REFINEMENT</div>
+        <img src="figures/mask_refinement_comparison.png" alt="Mask Refinement Comparison" class="w-full h-auto rounded border border-slate-100 max-h-56 object-contain mx-auto">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="font-bold text-blue-600 text-sm mb-2">Boundary Contour F@2px (+12.94%)</h3>
+          <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+            <li><strong class="text-slate-900">• Strict Precision:</strong> Evaluates contour alignment within strict 2-pixel tolerance.</li>
+            <li><strong class="text-slate-900">• Massive Jump:</strong> Rose from 21.30% to 34.24% (+60.7% relative gain).</li>
+            <li><strong class="text-slate-900">• Edge Alignment:</strong> Eliminates jagged spillover onto adjacent pavement.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="font-bold text-emerald-600 text-sm mb-2">Boundary Contour F@5px (+10.67%)</h3>
+          <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+            <li><strong class="text-slate-900">• Multi-Scale Stability:</strong> Evaluates relaxed contour tolerance margin at 5 pixels.</li>
+            <li><strong class="text-slate-900">• Consistent Gain:</strong> Advanced from 40.87% to 51.54% across scales.</li>
+            <li><strong class="text-slate-900">• Structure Preservation:</strong> Retains thin vehicle mirrors and wheel fenders.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="font-bold text-indigo-600 text-sm mb-2">Mask IoU & Dice Score Elevation</h3>
+          <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+            <li><strong class="text-slate-900">• Mask IoU (Jaccard):</strong> Surpassed baseline from 94.61% to 96.22% (+1.61%).</li>
+            <li><strong class="text-slate-900">• Dice Coefficient:</strong> Reached 98.07%, demonstrating near-perfect pixel overlap.</li>
+            <li><strong class="text-slate-900">• Active Prompts:</strong> Points <code class="code-pill">(P^+, P^-)</code> guide SAM 2 to snap to depth gradients.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 10: 4-WAY COMPREHENSIVE SYSTEM ABLATION STUDY -->
+  <!-- ===================================================================== -->
+  <section class="slide" id="slide-10">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Ablation Study</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">4-Way Full System Decoupling Matrix</h2>
+      <p class="text-slate-500 text-sm mb-6">Demonstrating complete orthogonality between semantic selection (SDG) and mask refinement (ABR).</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <!-- Figure -->
+        <div class="card bg-white p-4">
+          <div class="text-center text-xs font-bold text-blue-600 tracking-wider mb-2">FIGURE 4: 4-WAY ABLATION METRIC PROFILES</div>
+          <img src="figures/ablation_metrics_comparison.png" alt="Ablation Comparison" class="w-full h-auto rounded border border-slate-100 max-h-72 object-contain mx-auto">
+        </div>
+
+        <!-- Table & Insights -->
+        <div>
+          <div class="card overflow-hidden p-0 mb-4">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-blue-50 text-blue-900 font-bold border-b border-blue-200">
+                <tr>
+                  <th class="p-3">Configuration</th>
+                  <th class="p-3 text-center">SDG</th>
+                  <th class="p-3 text-center">ABR</th>
+                  <th class="p-3 text-center">Ref. Acc</th>
+                  <th class="p-3 text-center">IoU (J)</th>
+                  <th class="p-3 text-center">F@2px</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-mono text-slate-700">
+                <tr>
+                  <td class="p-2.5 font-sans">(1) Baseline FastReasonSeg</td>
+                  <td class="p-2.5 text-center text-slate-400">✗</td>
+                  <td class="p-2.5 text-center text-slate-400">✗</td>
+                  <td class="p-2.5 text-center">28.0%</td>
+                  <td class="p-2.5 text-center">94.61%</td>
+                  <td class="p-2.5 text-center">21.30%</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans">(2) FastReasonSeg + SDG</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">✓</td>
+                  <td class="p-2.5 text-center text-slate-400">✗</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">84.0%</td>
+                  <td class="p-2.5 text-center">94.61%</td>
+                  <td class="p-2.5 text-center">21.30%</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans">(3) FastReasonSeg + ABR</td>
+                  <td class="p-2.5 text-center text-slate-400">✗</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">✓</td>
+                  <td class="p-2.5 text-center">28.0%</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">96.22%</td>
+                  <td class="p-2.5 text-center text-emerald-600 font-bold">34.24%</td>
+                </tr>
+                <tr class="bg-emerald-50/70 font-semibold text-slate-900">
+                  <td class="p-3 font-sans text-blue-900">(4) FastReasonSeg-3D (Full)</td>
+                  <td class="p-3 text-center text-emerald-600 font-bold">✓</td>
+                  <td class="p-3 text-center text-emerald-600 font-bold">✓</td>
+                  <td class="p-3 text-center text-emerald-700 font-bold text-sm">84.0%</td>
+                  <td class="p-3 text-center text-emerald-700 font-bold text-sm">96.22%</td>
+                  <td class="p-3 text-center text-emerald-700 font-bold text-sm">34.24%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card bg-slate-50 border-slate-200">
+            <div class="text-xs font-bold text-slate-900 mb-2">Ablation Findings:</div>
+            <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+              <li><strong class="text-slate-900">• Complete Orthogonality:</strong> SDG operates purely on high-level candidate ranking (+56.0% Acc), leaving contours untouched. ABR acts on pixel boundaries (+12.94% F@2px), with zero candidate interference.</li>
+              <li><strong class="text-slate-900">• Zero Degradation:</strong> Joint deployment achieves peak performance across both metrics without trade-offs.</li>
+              <li><strong class="text-slate-900">• Negligible Overhead:</strong> Total runtime rises by only <strong>+48 ms</strong> (1,436 ms &rarr; 1,484 ms).</li>
+            </ul>
           </div>
         </div>
-        <div class="card flex items-start space-x-4">
-          <div class="text-emerald-400 text-xl font-bold">✓</div>
-          <div>
-            <h4 class="font-bold text-white text-lg">Validated Python Core Implementation</h4>
-            <p class="text-slate-400 text-sm">Modules <code class="text-sky-300">spatial_depth_gate.py</code> and <code class="text-sky-300">boundary_refiner.py</code> implemented, tested (8/8 tests passing), and integrated into the Streamlit app.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 11: LATENCY & COMPUTATIONAL EFFICIENCY -->
+  <!-- ===================================================================== -->
+  <section class="slide" id="slide-11">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Profiling</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">Latency Breakdown on NVIDIA RTX 4050 GPU</h2>
+      <p class="text-slate-500 text-sm mb-6">Per-frame runtime profiling on consumer laptop hardware (6GB VRAM, CUDA 12.4).</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <!-- Table -->
+        <div class="card overflow-hidden p-0">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-blue-50 text-blue-900 font-bold border-b border-blue-200">
+              <tr>
+                <th class="p-3">Pipeline Component</th>
+                <th class="p-3 text-center">Latency (ms)</th>
+                <th class="p-3 text-center">Share (%)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-mono text-slate-700">
+              <tr>
+                <td class="p-2.5 font-sans">OWLv2 Open-Vocabulary Detector</td>
+                <td class="p-2.5 text-center">312 ms</td>
+                <td class="p-2.5 text-center">21.0%</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-sans">Depth Anything V2 Estimation</td>
+                <td class="p-2.5 text-center">245 ms</td>
+                <td class="p-2.5 text-center">16.5%</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-sans">SAM 2 Initial Mask Prediction</td>
+                <td class="p-2.5 text-center">385 ms</td>
+                <td class="p-2.5 text-center">25.9%</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-sans">Digital Twin JSON Construction</td>
+                <td class="p-2.5 text-center">14 ms</td>
+                <td class="p-2.5 text-center">0.9%</td>
+              </tr>
+              <tr>
+                <td class="p-2.5 font-sans">LLM Symbolic Reasoning (Qwen-2.5)</td>
+                <td class="p-2.5 text-center">480 ms</td>
+                <td class="p-2.5 text-center">32.3%</td>
+              </tr>
+              <tr class="bg-blue-50/50 text-blue-800 font-semibold">
+                <td class="p-2.5 font-sans">SpatialDepthGate (SDG - Ours)</td>
+                <td class="p-2.5 text-center">6 ms</td>
+                <td class="p-2.5 text-center">0.4%</td>
+              </tr>
+              <tr class="bg-blue-50/50 text-blue-800 font-semibold">
+                <td class="p-2.5 font-sans">AdaptiveBoundaryRefiner (ABR - Ours)</td>
+                <td class="p-2.5 text-center">42 ms</td>
+                <td class="p-2.5 text-center">2.8%</td>
+              </tr>
+              <tr class="bg-emerald-50 text-emerald-900 font-bold">
+                <td class="p-3 font-sans">Total FastReasonSeg-3D Pipeline</td>
+                <td class="p-3 text-center text-sm">1,484 ms</td>
+                <td class="p-3 text-center text-sm">100.0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Right Insights Cards -->
+        <div class="space-y-4">
+          <div class="card">
+            <h3 class="font-bold text-blue-600 text-sm mb-1">Ultra-Low +48 ms Overhead (+3.3%)</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">Introducing full 3D spatial coordinate projection, pairwise tensor operations, and active contour refinement adds just 48 ms to the baseline 1,436 ms pipeline. SDG executes via high-speed matrix multiplications in only 6 ms, while ABR computes Sobel depth ridges and morphological ops in 42 ms.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-bold text-emerald-600 text-sm mb-1">Consumer Laptop Hardware Feasible</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">Peak VRAM footprint is only <strong>5.2 GB</strong>, fitting comfortably within entry-level 6GB laptop GPUs (NVIDIA RTX 4050). No multi-node datacenter clusters (8x A100/H100) are required. The entire pipeline runs 100% locally on Debian GNU/Linux.</p>
+          </div>
+          <div class="card">
+            <h3 class="font-bold text-indigo-600 text-sm mb-1">Dramatic Speedup vs. Monolithic MLLMs</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">FastReasonSeg-3D (1.48s) is <strong>2.5x faster than LISA</strong> (3,800 ms) and <strong>4.2x faster than GLaMM</strong> (6,200 ms), unlocking edge robotic feasibility and real-time interactive perception.</p>
           </div>
         </div>
-        <div class="card flex items-start space-x-4">
-          <div class="text-emerald-400 text-xl font-bold">✓</div>
-          <div>
-            <h4 class="font-bold text-white text-lg">Empirical Benchmark Artifacts</h4>
-            <p class="text-slate-400 text-sm">Persisted results at <code class="text-sky-300">results/ablation_benchmark_results.csv</code> proving +56.0% accuracy gain and +12.94% boundary contour improvement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 12: NEURAL SPATIALDEPTHGATE TRAINING CONVERGENCE -->
+  <!-- ===================================================================== -->
+  <section class="slide" id="slide-12">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Neural Training</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">Neural SDG Architecture & Convergence</h2>
+      <p class="text-slate-500 text-sm mb-6">PyTorch cross-attention training achieving 92.5% validation accuracy in 25 epochs.</p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <!-- Figure -->
+        <div class="card bg-white p-4">
+          <div class="text-center text-xs font-bold text-blue-600 tracking-wider mb-2">FIGURE 5: PYTORCH TRAINING LOSS & VALIDATION ACCURACY</div>
+          <img src="figures/training_loss_convergence.png" alt="Training Convergence" class="w-full h-auto rounded border border-slate-100 max-h-72 object-contain mx-auto">
+        </div>
+
+        <!-- Table & Details -->
+        <div>
+          <div class="card overflow-hidden p-0 mb-4">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-blue-50 text-blue-900 font-bold border-b border-blue-200">
+                <tr>
+                  <th class="p-3 text-center">Epoch</th>
+                  <th class="p-3 text-center">Train Loss</th>
+                  <th class="p-3 text-center">Val Loss</th>
+                  <th class="p-3 text-center">Val Acc (%)</th>
+                  <th class="p-3 text-center">Learning Rate</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-mono text-slate-700">
+                <tr>
+                  <td class="p-2 text-center">1</td>
+                  <td class="p-2 text-center">1.4301</td>
+                  <td class="p-2 text-center">1.3850</td>
+                  <td class="p-2 text-center">36.25%</td>
+                  <td class="p-2 text-center text-slate-500">1.0 × 10⁻³</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-center">5</td>
+                  <td class="p-2 text-center">1.0390</td>
+                  <td class="p-2 text-center">1.0120</td>
+                  <td class="p-2 text-center">50.00%</td>
+                  <td class="p-2 text-center text-slate-500">1.0 × 10⁻³</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-center">10</td>
+                  <td class="p-2 text-center">0.4575</td>
+                  <td class="p-2 text-center">0.4820</td>
+                  <td class="p-2 text-center">75.00%</td>
+                  <td class="p-2 text-center text-slate-500">8.0 × 10⁻⁴</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-center">15</td>
+                  <td class="p-2 text-center">0.1824</td>
+                  <td class="p-2 text-center">0.2105</td>
+                  <td class="p-2 text-center">87.50%</td>
+                  <td class="p-2 text-center text-slate-500">5.0 × 10⁻⁴</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-center">20</td>
+                  <td class="p-2 text-center">0.1364</td>
+                  <td class="p-2 text-center">0.1650</td>
+                  <td class="p-2 text-center">90.00%</td>
+                  <td class="p-2 text-center text-slate-500">2.0 × 10⁻⁴</td>
+                </tr>
+                <tr class="bg-emerald-50 text-emerald-900 font-bold">
+                  <td class="p-2.5 text-center">25</td>
+                  <td class="p-2.5 text-center">0.1344</td>
+                  <td class="p-2.5 text-center">0.1410</td>
+                  <td class="p-2.5 text-center text-emerald-700 text-sm">92.50%</td>
+                  <td class="p-2.5 text-center text-emerald-700">1.0 × 10⁻⁴</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card bg-slate-50 border-slate-200">
+            <div class="text-xs font-bold text-slate-900 mb-2">Architecture Highlights:</div>
+            <ul class="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+              <li><strong class="text-slate-900">• Lightweight Head:</strong> 2-layer MLP instruction projector into <code class="code-pill">D=128</code> latent dimension, with 4-head spatial cross-attention across relational tensors <code class="code-pill">R_{ij}</code>.</li>
+              <li><strong class="text-slate-900">• Smooth Convergence:</strong> Cross-entropy loss steadily drops from 1.43 to 0.134, with validation accuracy reaching 92.50% without signs of overfitting.</li>
+              <li><strong class="text-slate-900">• Rapid Edge Training:</strong> Complete 25-epoch training loop finishes in under 3 minutes on single NVIDIA RTX 4050 GPU.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 13: QUALITATIVE CASE STUDIES & APPLICATIONS -->
+  <!-- ===================================================================== -->
+  <section class="slide" id="slide-13">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Applications</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">Qualitative Case Studies & Embodied AI</h2>
+      <p class="text-slate-500 text-sm mb-6">Validating practical utility across robotic navigation, manipulation, and augmented reality.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div class="card">
+          <h3 class="font-bold text-blue-600 text-sm mb-2">Case Study 1: Severe Dynamic Occlusion</h3>
+          <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+            <li><strong class="text-slate-900">• Scenario:</strong> Two vehicles along optical axis. Referring query: <em>"the vehicle occluded directly behind the lead truck"</em>.</li>
+            <li><strong class="text-slate-900">• Baseline Failure:</strong> Both vehicles share identical 2D categories; baseline picks foreground truck (incorrect).</li>
+            <li><strong class="text-slate-900">• SDG Resolution:</strong> Evaluates <code class="code-pill">IoU_{2D} = 0.28 > \tau_{occ}</code> and <code class="code-pill">\Delta z < -0.15 \implies \mathcal{O}_{truck \to car}=1</code>. Reliably targets occluded car with 100% confidence.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="font-bold text-emerald-600 text-sm mb-2">Case Study 2: Delicate Boundary Snapping</h3>
+          <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+            <li><strong class="text-slate-900">• Scenario:</strong> Vehicle side mirrors, radio antennas, and wheel arches against dark asphalt pavement under low contrast.</li>
+            <li><strong class="text-slate-900">• Baseline Failure:</strong> SAM 2 bounding box leaks into asphalt pavement, limiting Boundary F@2px to 21.30%.</li>
+            <li><strong class="text-slate-900">• ABR Resolution:</strong> Sobel depth gradient <code class="code-pill">\nabla D</code> identifies physical chassis edge; synthesizes negative bleed prompts <code class="code-pill">(P^-)</code> to cleanly excise road pixels, boosting F@2px to 34.24%.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card bg-blue-50/40 border-blue-200">
+          <h4 class="font-bold text-slate-900 text-xs mb-1">Autonomous Mobile Robots (AMR)</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Interprets navigation commands (<em>"navigate behind blue pallet"</em>) in cluttered warehouses; sharp boundaries prevent collision miscalculations.</p>
+        </div>
+        <div class="card bg-emerald-50/40 border-emerald-200">
+          <h4 class="font-bold text-slate-900 text-xs mb-1">Robotic Manipulation & Grasping</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Disambiguates stacked, occluded objects based on relative depth rank <code class="code-pill">z_{rel}</code>. Accurate contours ensure reliable gripper placement.</p>
+        </div>
+        <div class="card bg-indigo-50/40 border-indigo-200">
+          <h4 class="font-bold text-slate-900 text-xs mb-1">Augmented Reality & Wearables</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">Real-time contextual object highlights on smart glasses without cloud latency. Low 5.2 GB VRAM requirement enables on-device edge execution.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- SLIDE 14: CONCLUSION, ROADMAP & DELIVERABLES -->
+  <!-- ===================================================================== -->
+  <section class="slide" id="slide-14">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="badge mb-3">Deliverables</div>
+      <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2">Conclusion, Roadmap & Open-Source Artifacts</h2>
+      <p class="text-slate-500 text-sm mb-8">A complete, reproducible, and production-ready geometry-aware reasoning segmentation framework.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="font-bold text-blue-600 text-sm mb-3">Core Scientific Conclusions</h3>
+          <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+            <li><strong class="text-slate-900">• Bottlenecks Solved:</strong> Eliminated Geometric Depth Collapse via SDG and Zero-Shot Boundary Bleed via ABR in decoupled segmentation.</li>
+            <li><strong class="text-slate-900">• Quantified Gains:</strong> <strong class="text-emerald-700">+56.0%</strong> referring accuracy (84.0% overall, 100% on occlusion), <strong class="text-blue-700">+12.94%</strong> boundary contour F@2px, and <strong class="text-indigo-700">+1.61%</strong> mask IoU.</li>
+            <li><strong class="text-slate-900">• Edge Efficiency:</strong> Adds just ~48 ms latency on single laptop GPU (RTX 4050, 6GB VRAM) without requiring massive MLLM retraining.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 class="font-bold text-emerald-600 text-sm mb-3">Future Research Roadmap</h3>
+          <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+            <li><strong class="text-slate-900">• 1. Temporal 3D Kalman Smoothing:</strong> Propagating 3D depth-relational tensors across streaming video frames for temporal consistency.</li>
+            <li><strong class="text-slate-900">• 2. 6-DoF Metric Pose Integration:</strong> Coupling metric depth models to estimate real-world 3D bounding boxes and physical volumes for robotic graspers.</li>
+            <li><strong class="text-slate-900">• 3. Multi-View Depth Aggregation:</strong> Fusing monocular depth across multi-camera robotic rigs into unified 3D point cloud representations.</li>
+          </ul>
+        </div>
+
+        <div class="card bg-slate-50 border-slate-200">
+          <h3 class="font-bold text-indigo-600 text-sm mb-3">Open-Source Deliverables & Info</h3>
+          <div class="text-xs text-slate-700 space-y-2 leading-relaxed">
+            <div><strong class="text-slate-900">Author:</strong> Geddam Charan Kumar</div>
+            <div><strong class="text-slate-900">Reg. Number:</strong> <span class="font-mono text-blue-600">24BCE8232</span></div>
+            <div><strong class="text-slate-900">Affiliation:</strong> SCOPE, Vellore Institute of Technology</div>
+            <div><strong class="text-slate-900">Email:</strong> <a href="mailto:geddamcharan24@gmail.com" class="text-blue-600 font-mono hover:underline">geddamcharan24@gmail.com</a></div>
+            <div class="pt-2 border-t border-slate-200">
+              <div class="font-semibold text-slate-900 mb-1">Open-Source Links:</div>
+              <div class="truncate"><a href="https://github.com/charanG-hub/FastReasonSeg" target="_blank" class="text-blue-600 hover:underline">github.com/charanG-hub/FastReasonSeg</a></div>
+              <div class="text-[11px] text-slate-500 mt-1">Kaggle Dataset: <span class="font-mono text-slate-700">fastreasonseg-3d</span></div>
+              <div class="text-[11px] text-slate-500">Kaggle Notebook: <span class="font-mono text-slate-700">fastreasonseg-3d-reasoning-segmentation</span></div>
+            </div>
           </div>
         </div>
       </div>

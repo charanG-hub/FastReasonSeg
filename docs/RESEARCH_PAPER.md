@@ -3,6 +3,7 @@
 **Author:** Geddam Charan Kumar  
 **Registration Number:** 24BCE8232  
 **Affiliation:** School of Computer Science and Engineering (SCOPE), Vellore Institute of Technology (VIT), India  
+**Email:** geddamcharan24@gmail.com  
 **Date:** November 2026  
 **Status:** Comprehensive Research Paper / Technical Report  
 **Target Venue:** IEEE / CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshop on Foundation Vision-Language Models & Embodied AI  
